@@ -5,6 +5,7 @@ var io = require('socket.io').listen(app.listen(port, "0.0.0.0"));
 
 
 app.use(express.static(__dirname + '/public'));
+app.use('/scripts', express.static(__dirname + '/node_modules/'));
 
 var secret = 'frederik';
 
