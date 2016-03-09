@@ -1,0 +1,27 @@
+{
+  "name": "remote-pres",
+  "version": "1.0.0",
+  "description": "Using your smartphone to control your presentation",
+  "main": "remotePres.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "supervisor remotePres.js"
+  },
+  "keywords": [
+    "remote",
+    "control",
+    "smartphone",
+    "presentation",
+    "Frederik van Genderen"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frederikvg/remotePres.git"
+  },
+  "author": "Frederik van Genderen <frederikvangenderen.nl>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "*",
+    "socket.io": "*"
+  }
+}
