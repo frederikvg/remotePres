@@ -26,7 +26,6 @@
     "angular": "*",
     "angular-animate": "*",
     "angular-route": "*",
-    "jquery": "*",
-    "revealjs": "https://github.com/hakimel/reveal.js.git"
+    "jquery": "*"
   }
 }
