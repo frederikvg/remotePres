@@ -19,6 +19,8 @@ remotePres.config(
 
 remotePres.directive('fbLogin', function () {
     return {
+        restrict: 'A',
+        transclude: true,
         templateUrl: 'views/login.html'
     };
 });

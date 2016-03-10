@@ -26,9 +26,9 @@
 
 <body ng-controller="remoteCtrl">
 
-    <section fb-login></section>
+    <section fb-login ng-hide="loginForm"></section>
 
-    <div class="reveal blurred">
+    <div ng-class="{blurred:blurred}" class="reveal">
         <div class="slides">
 
             <section data-background="img/1.jpg">
