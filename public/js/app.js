@@ -1,21 +1,6 @@
 'use strict';
 
-var remotePres = angular.module('remotePres', ['remoteCtrl', 'remoteService', 'ngAnimate', 'ngRoute']);
-
-remotePres.config(
-    ['$routeProvider', function ($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/main.html'
-            })
-            .when('/main', {
-                templateUrl: 'views/main.html'
-            })
-            .otherwise({
-                redirectTo: '/'
-            });
-    }]
-);
+var remotePres = angular.module('remotePres', ['remoteCtrl', 'remoteService']);
 
 remotePres.directive('fbLogin', function () {
     return {
