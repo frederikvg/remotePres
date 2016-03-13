@@ -9,3 +9,11 @@ remotePres.directive('fbLogin', function () {
         templateUrl: 'views/login.html'
     };
 });
+
+remotePres.directive('fbCode', function () {
+    return {
+        restrict: 'A',
+        transclude: true,
+        templateUrl: 'views/code.html'
+    };
+});

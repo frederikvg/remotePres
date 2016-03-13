@@ -4,7 +4,11 @@ var remoteCtrl = angular.module('remoteCtrl', []);
 
 remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval', function (socket, $scope, $timeout, $interval) {
 
+   $('h6').on('click',function(){
+      $('.social').stop().slideToggle();
+})
     $scope.blurred = true;
+    $scope.codeForm = true;
     var key;
     var animationTimeout;
 
