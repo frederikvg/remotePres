@@ -10,7 +10,7 @@ module.exports = function (app) {
     });
 
     app.post('/monster', function (req, res) {
-        var newMonster = new ngMonster({ 
+        var newMonster = new UserDetail({ 
             heroClass: req.body.heroclass, 
             monsterClass: req.body.monsterclass, 
             blabla: req.body.blabla, 

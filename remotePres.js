@@ -1,6 +1,4 @@
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose/');
@@ -11,8 +9,8 @@ var secret = 'frederik';
 mongoose.connect('mongodb://localhost/passport');
 var app = express();
 
-var port = process.env.PORT || 3000;
-var io = require('socket.io').listen(app.listen(port, "0.0.0.0"));
+var port = 3000;
+var io = require('socket.io').listen(app.listen(port));
 app.set('views', __dirname + '/public/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -27,7 +25,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/scripts/', express.static(__dirname + '/node_modules'));
 
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
 var presentation = io.on('connection', function (socket) {
@@ -49,59 +47,79 @@ var presentation = io.on('connection', function (socket) {
 
 var Schema = mongoose.Schema;
 
-
 var UserDetail = new Schema({
     username: String,
     password: String
 }, {collection: 'userInfo'});
 
-var UserDetails = mongoose.model('userInfo',UserDetail);
+var UserDetails = mongoose.model('userInfo', UserDetail);
 
-passport.serializeUser(function(user, done) {
-  done(null, user);
+passport.serializeUser(function (user, done) {
+    done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
-  done(null, user);
+passport.deserializeUser(function (user, done) {
+    done(null, user);
 });
-
 
 passport.use(new LocalStrategy(
-  function(username, password, done) {
-   
-    process.nextTick(function () {
-    UserDetails.findOne({'username':username},
-    function(err, user) {
-      if (err) { return done(err); }
-      if (!user) { return done(null, false); }
-      if (user.password != password) { return done(null, false); }
-      return done(null, user);
-    });
-    });
-  }
+    function (username, password, done) {
+        process.nextTick(function () {
+            UserDetails.findOne({'username':username}, function (err, user) {
+                if (err) { return done(err); }
+                if (!user) { return done(null, false); }
+                if (user.password != password) { return done(null, false); }
+                return done(null, user);
+            });
+        });
+    }
 ));
 
 
-
-app.get('/auth', function(req, res, next) {
-  res.sendfile('views/login.html');
+app.get('/passports', function (req, res) {
+    Users.find(function (err, todos) {
+        if (err) res.send(err);
+        else res.json(todos);
+    });
 });
 
+app.post('/passport', function (req, res) {
+    console.log('ontvangen in app.post!');
+    var newUser = new UserDetails({
+        username: req.body.username, 
+        password: req.body.password
+    });
 
-app.get('/loginFailure' , function(req, res, next){
-  res.send('Failure to authenticate');
+    newUser.save(function (err) {
+        if (err)res.send(err);
+        res.status(200).end();
+    });
 });
 
-app.get('/loginSuccess' , function(req, res, next){
-  res.send('Successfully authenticated');
+app.delete('/passport/:id', function (req, res) {
+    Users.remove({
+        _id: req.params.id
+    }, function (err, todo) {
+        if (err)
+        res.send(err);
+        res.status(200).end();
+    });
 });
 
-app.post('/login',
-  passport.authenticate('local', {
-    successRedirect: '/loginSuccess',
-    failureRedirect: '/loginFailure'
-  }));
+app.get('/loginFailure' , function (req, res, next){
+    res.send('Failure to authenticate');
+});
 
-console.log('ToDo-App draait nu op localhost:3000');
+app.get('/loginSuccess' , function (req, res, next){
+    res.send('Successfully authenticated');
+});
 
+app.post('/login', 
+    passport.authenticate('local', {
+        successRedirect: '/loginSuccess',
+        failureRedirect: '/loginFailure'
+    })
+);
 
+var user = require('./routes/user');
+console.log('remotePres draait nu op localhost:3000');

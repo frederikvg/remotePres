@@ -76,7 +76,7 @@ h1 {
     text-align: center;
     font-size: 1.4em;
     font-weight: 700;
-    color: #ccc;
+    color: inherit;
     margin: 24px 0;
 }
 
@@ -84,7 +84,12 @@ h1 > span {
     font-weight: 200;
 }
 
-form {
+h1 > span.wrong {
+    color: #F26964;
+}
+
+form#loginForm {
+    color: #CCCCCC;
     background: #FFFFFF;
     border-radius: 6px;
     padding: 20px;
@@ -92,6 +97,19 @@ form {
     width: 300px;
     margin: 10% auto;
     box-shadow: 15px 15px 0px rgba(0,0,0,.1);
+}
+
+form#codeForm {
+    color: #666666;
+    background: rgba(255,255,255,.4);
+    border-radius: 6px;
+    padding: 20px;
+    width: 40%;
+    position: fixed;
+    left: 50%;
+    margin-left: -20%;
+    top: 40%;
+    z-index: 10;
 }
 
 input {

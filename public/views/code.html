@@ -1,5 +1,6 @@
-<form class="login">
-    <span>Wat is je combinatiecode?</span>
-    <input type="password" placeholder="Code..." ng-model="login" ng-class="wrongPass">
-    <input type="submit" value="➡" ng-click="loginCheck()" />
+<form autocomplete="off" name="codeForm" id="codeForm">
+    <h1><span>Open een</span> Pres</h1>
+    <input type="password" placeholder="Code" ng-model="login" ng-class="wrongPass" />
+    <h1 ng-if="wrongCode"><span class="wrong">{{ wrongCode }}</span></h1>
+    <input type="button" class="blue btn" ng-click="loginCode()" value="Open pres" />
 </form>

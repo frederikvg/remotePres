@@ -1,11 +1,8 @@
 var mongoose = require('mongoose');
 
-var monsterSchema =  new mongoose.Schema ({
-  heroClass: { type: String,  default: '' },
-  monsterClass: { type: String, default: ''},
-  blabla: { type: String, default: ''},
-  yyy: { type: String, default: ''}
-});
+var UserDetail = new mongoose.Schema({
+    username: String,
+    password: String
+}, {collection: 'userInfo'});
 
-module.exports = mongoose.model('monsters', monsterSchema);
-
+module.exports = mongoose.model('userInfo', UserDetail);

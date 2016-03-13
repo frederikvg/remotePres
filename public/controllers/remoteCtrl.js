@@ -2,12 +2,13 @@
 
 var remoteCtrl = angular.module('remoteCtrl', []);
 
-remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval', function (socket, $scope, $timeout, $interval) {
+remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval', 'Passport', function (socket, $scope, $timeout, $interval, Passport) {
 
     $scope.blurred = true;
-    $scope.codeForm = true;
+    $scope.hideForm = false;
+    $scope.hideCode = true;
+    $scope.user = '';
     var key;
-    var animationTimeout;
 
     $scope.slides = [
         { image: "img/1.jpg", video: "", title: "Title Text", content: "Lorem Ipsum is slechts een proeftekst PageMaker die versies van Lorem Ipsum bevatten.",  background:"img/3.jpg"},
@@ -33,20 +34,48 @@ remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval'
     };
 
     $scope.loginCode = function () {
-        key = $scope.login;
+        key = $scope.presCode;
         console.log('pass: ' + key);
-        if (key.length) {
+        if (key) {
             socket.emit('load', {
                 key: key
             });
+        } else {
+            $scope.wrongCode = 'No code entered';
+            $timeout(function () {
+                $scope.wrongCode = ''
+            }, 3000);
         }
+    };
+
+    $scope.save = function () {
+        if ($scope.user!=null) {
+            console.log($scope.user);
+            Passport.create($scope.user)
+                .success(function () {
+                    // load();
+                });
+        } else {
+            $scope.checked = true;
+        }
+    };
+
+    $scope.delete = function (id) {
+        var li = document.getElementById(id);
+        li.className = 'todo animated fadeOut';
+        setTimeout(function() {
+            Passport.delete(id)
+            .success(function (data) {
+                load();
+            });
+        }, 600);
     };
 
     socket.on('access', function (data) {
         if (data.access === "granted") {
-            $scope.mainForm = true;
-            $scope.blurred = false;
-            $scope.loginForm = true;
+            $scope.blurred = true;
+            $scope.hideForm = true;
+            $scope.hideCode = false;
             var ignore = false;
 
             $(window).on('hashchange', function () {
@@ -71,10 +100,10 @@ remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval'
                 }, 100);
             });
         } else {
-            $scope.wrongPass = 'denied animation';
+            $scope.wrongCode = 'No presentation found with this code';
             $timeout(function () {
-                $scope.wrongPass = 'denied'
-            }, 1000);
+                $scope.wrongCode = ''
+            }, 3000);
         }
     });
 }]);
