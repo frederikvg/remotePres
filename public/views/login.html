@@ -3,12 +3,12 @@
     <input placeholder="Username" type="text" name="username" />
     <input type="text" style="display:none" />
     <input placeholder="Password" type="password" name="password" />
-    <input type="button" class="btn" ng-click="loginCheck()" value="Log in" />
+    <input type="button" class="btn red" ng-click="loginCheck()" value="Log in" />
 
     <h1><span>Open direct een</span> Pres</h1>
     <input type="password" placeholder="Code" ng-model="presCode" />
     <h1 ng-if="wrongCode"><span class="wrong">{{ wrongCode }}</span></h1>
-    <input type="button" class="blue btn" ng-click="loginCode()" value="Open pres" />
+    <input type="button" class="btn blue" ng-click="loginCode()" value="Open pres" />
 
     <input type="button" class="btn default" slide-toggle="#addUser" value="+" />
     <input type="button" class="btn default" slide-toggle="#forgotPass" value="?" />

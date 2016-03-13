@@ -89,14 +89,14 @@ h1 > span.wrong {
 }
 
 form#loginForm {
-    color: #CCCCCC;
-    background: #FFFFFF;
+    color: #6F6F6F;
+    background: rgba(255,255,255,.4);
     border-radius: 6px;
     padding: 20px;
     padding-top: 30px;
-    width: 300px;
+    width: 350px;
     margin: 10% auto;
-    box-shadow: 15px 15px 0px rgba(0,0,0,.1);
+    box-shadow: 8px 8px 0px rgba(0,0,0,.1);
 }
 
 form#codeForm {
@@ -113,7 +113,7 @@ form#codeForm {
 }
 
 input {
-    width: 86%;
+    width: 88%;
     background: #F5F5F5;
     border: 0;
     padding: 20px;
@@ -159,33 +159,25 @@ div.reveal {
 }
 
 /* loginForm */
+.foldout {
+    padding-bottom: 3px;
+    text-align: center;
+}
+
 .btn {
     position: relative;
     width: 100%;
     padding: 20px;
     border-radius: 6px;
     border: 0;
-    background: #F26964;
     font-size: 1.2em;
     color: #fff;
     text-shadow: 1px 1px 0px rgba(0,0,0,.1);
-    box-shadow: 0px 3px 0px #C1524E;
 }
 
 .btn:active {
     top: 3px;
     box-shadow: none;
-}
-
-.foldout {
-    padding-bottom: 3px;
-    text-align: center;
-}
-
-.blue {
-    background: #00ACEE;
-    box-shadow: 0px 3px 0px #008DC3;
-    margin-top: 3px;
 }
 
 .default {
@@ -196,8 +188,20 @@ div.reveal {
     margin-top: 10px;
 }
 
+.red {
+    background: #F26964;
+    box-shadow: 0px 3px 0px #C1524E;
+    margin-top: 3px;
+}
+
+.blue {
+    background: #00ACEE;
+    box-shadow: 0px 3px 0px #008DC3;
+    margin-top: 3px;
+}
+
 .green {
-    background: #6ECC54;
+    background: #63B47A;
     box-shadow: 0px 3px 0px #549E3F;
     width: 49%;
     margin-top: 10px;
