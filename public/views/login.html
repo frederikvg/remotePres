@@ -1,10 +1,11 @@
-<form action="/login" method="post">
-    <h1><span>Life's</span> Good</h1>
+<form action="/login" method="post" autocomplete="off">
+    <h1><span>remote</span>Pres</h1>
     <input placeholder="Username" type="text" name="username" />
+    <input type="text" style="display:none" />
     <input placeholder="Password" type="password" name="password" />
     <button type="submit" class="btn">Log in</button>
-    <h6>Oh, social?</h6>
-    <div class="social">
+    <h6 slide-toggle="#social">Oh, social?</h6>
+    <div id="social" class="slideable" easing="linear" duration=".3s">
         <button class="tw btn">Aanmaken</button>
         <button class="fb btn">Vergeten</button>
         <button class="google fb btn">Verwijderen</button>
