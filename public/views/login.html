@@ -1,13 +1,28 @@
-<form action="/login" method="post" autocomplete="off">
+<form method="post" autocomplete="off" name="loginForm">
     <h1><span>remote</span>Pres</h1>
     <input placeholder="Username" type="text" name="username" />
     <input type="text" style="display:none" />
     <input placeholder="Password" type="password" name="password" />
-    <button type="submit" class="btn">Log in</button>
-    <h6 slide-toggle="#social">Oh, social?</h6>
-    <div id="social" class="slideable" easing="linear" duration=".3s">
-        <button class="tw btn">Aanmaken</button>
-        <button class="fb btn">Vergeten</button>
-        <button class="google fb btn">Verwijderen</button>
+    <input type="button" class="btn" ng-click="loginCheck()" value="Log in" />
+
+    <h1><span>Open direct een</span> Pres</h1>
+    <input type="password" placeholder="Code..." ng-model="login" ng-class="wrongPass" />
+    <input type="button" class="blue btn" ng-click="loginCode()" value="Open pres" />
+
+    <input type="button" class="btn default" slide-toggle="#addUser" value="+" />
+    <input type="button" class="btn default" slide-toggle="#forgotPass" value="?" />
+
+    <div id="addUser" class="slideable foldout" easing="linear" duration=".3s">
+        <h1><span>Maak een nieuw </span>Account <span>aan</span></h1>
+        <input placeholder="Username" type="text" name="username" />
+        <input placeholder="Password" type="password" name="password" />
+        <input placeholder="Email" type="email" name="email" />
+        <input type="button" class="btn green" ng-click="createUser()" value="Maak aan" />
+    </div>
+
+    <div id="forgotPass" class="slideable foldout" easing="linear" duration=".3s">
+        <h1><span>Passwoord </span>Vergeten<span>?</span></h1>
+        <input placeholder="Email" type="email" name="email" />
+        <input type="button" class="btn green" ng-click="sendPass()" value="Stuur" />
     </div>
 </form>

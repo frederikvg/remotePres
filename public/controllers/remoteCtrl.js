@@ -4,9 +4,6 @@ var remoteCtrl = angular.module('remoteCtrl', []);
 
 remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval', function (socket, $scope, $timeout, $interval) {
 
-   $('h6').on('click',function(){
-      $('.social').stop().slideToggle();
-})
     $scope.blurred = true;
     $scope.codeForm = true;
     var key;
@@ -30,9 +27,12 @@ remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval'
         });
     }, 1000);
 
-
     $scope.loginCheck = function () {
+        document.loginForm.action = "/login";
+        document.loginForm.submit();
+    };
 
+    $scope.loginCode = function () {
         key = $scope.login;
         console.log('pass: ' + key);
         if (key.length) {
@@ -44,6 +44,7 @@ remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval'
 
     socket.on('access', function (data) {
         if (data.access === "granted") {
+            $scope.mainForm = true;
             $scope.blurred = false;
             $scope.loginForm = true;
             var ignore = false;

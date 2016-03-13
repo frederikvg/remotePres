@@ -38,9 +38,9 @@ remotePres.directive('slideable', function () {
             };
         }
     };
-})
+});
 
-.directive('slideToggle', function() {
+remotePres.directive('slideToggle', function() {
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
