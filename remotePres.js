@@ -45,15 +45,6 @@ var presentation = io.on('connection', function (socket) {
     });
 });
 
-var Schema = mongoose.Schema;
-
-var UserDetail = new Schema({
-    username: String,
-    password: String
-}, {collection: 'userInfo'});
-
-var UserDetails = mongoose.model('userInfo', UserDetail);
-
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
@@ -65,7 +56,7 @@ passport.deserializeUser(function (user, done) {
 passport.use(new LocalStrategy(
     function (username, password, done) {
         process.nextTick(function () {
-            UserDetails.findOne({'username':username}, function (err, user) {
+            user.findOne({'username':username}, function (err, user) {
                 if (err) { return done(err); }
                 if (!user) { return done(null, false); }
                 if (user.password != password) { return done(null, false); }
@@ -75,9 +66,8 @@ passport.use(new LocalStrategy(
     }
 ));
 
-
 app.get('/passports', function (req, res) {
-    Users.find(function (err, todos) {
+    user.find(function (err, todos) {
         if (err) res.send(err);
         else res.json(todos);
     });
@@ -85,9 +75,10 @@ app.get('/passports', function (req, res) {
 
 app.post('/passport', function (req, res) {
     console.log('ontvangen in app.post!');
-    var newUser = new UserDetails({
+    var newUser = new user({
         username: req.body.username, 
-        password: req.body.password
+        password: req.body.password,
+        email: req.body.email
     });
 
     newUser.save(function (err) {
@@ -97,7 +88,7 @@ app.post('/passport', function (req, res) {
 });
 
 app.delete('/passport/:id', function (req, res) {
-    Users.remove({
+    user.remove({
         _id: req.params.id
     }, function (err, todo) {
         if (err)

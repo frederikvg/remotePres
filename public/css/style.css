@@ -88,14 +88,19 @@ h1 > span.wrong {
     color: #F26964;
 }
 
-form#loginForm {
+i {
+    margin: 10px;
+    color: rgba(255,255,255,.4);
+}
+
+form {
     color: #6F6F6F;
     background: rgba(255,255,255,.4);
     border-radius: 6px;
     padding: 20px;
     padding-top: 30px;
     width: 350px;
-    margin: 10% auto;
+    margin: 20px auto;
     box-shadow: 8px 8px 0px rgba(0,0,0,.1);
 }
 
@@ -183,26 +188,56 @@ div.reveal {
 .default {
     background: #F5F5F5;
     box-shadow: 0px 3px 0px #CCCCCC;
-    width: 49%;
+    width: 100px;
     color: #9E9E9E;
     margin-top: 10px;
 }
 
 .red {
-    background: #F26964;
-    box-shadow: 0px 3px 0px #C1524E;
+    background: rgba(242,105,100,1);
+    box-shadow: 0px 3px 0px rgba(193,82,78,1);
+    margin-top: 3px;
+}
+
+.red:disabled {
+    background: rgba(242,105,100,.4);
+    box-shadow: 0px 3px 0px rgba(193,82,78,.4);
     margin-top: 3px;
 }
 
 .blue {
-    background: #00ACEE;
-    box-shadow: 0px 3px 0px #008DC3;
+    background: rgba(0,172,238,1);
+    box-shadow: 0px 3px 0px rgba(0,141,195,1);
+    margin-top: 3px;
+}
+
+.blue:disabled {
+    background: rgba(0,172,238,.4);
+    box-shadow: 0px 3px 0px rgba(0,141,195,.4);
     margin-top: 3px;
 }
 
 .green {
-    background: #63B47A;
-    box-shadow: 0px 3px 0px #549E3F;
+    background: rgba(99,180,122,1);
+    box-shadow: 0px 3px 0px rgba(84,158,63,1);
     width: 49%;
     margin-top: 10px;
+}
+
+.green:disabled {
+    background: rgba(99,180,122,.4);
+    box-shadow: 0px 3px 0px rgba(84,158,63,.4);
+    width: 49%;
+    margin-top: 10px;
+}
+
+.error .control {
+    border-color: #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+}
+
+.error .help {
+    color: #a94442;
+    margin-bottom: 10px;
 }

@@ -1,29 +1,72 @@
-<form method="post" autocomplete="off" name="loginForm" id="loginForm">
+<i slide-toggle="#addUser" class="fa fa-user-plus fa-3x"></i>
+<i slide-toggle="#forgotPass" class="fa fa-question-circle fa-3x"></i>
+
+<form method="post" autocomplete="off" name="loginForm" novalidate>
     <h1><span>remote</span>Pres</h1>
-    <input placeholder="Username" type="text" name="username" />
+
+    <div ng-class="{ 'error' : loginForm.username.$invalid && !loginForm.username.$pristine }">
+        <label>Naam:</label>
+        <input placeholder="Username" class="control" type="text" ng-model="username" name="username" required />
+        <p ng-show="loginForm.username.$invalid && !loginForm.username.$pristine" class="help">Je gebruikersnaam is nodig.</p>
+    </div>
+
     <input type="text" style="display:none" />
-    <input placeholder="Password" type="password" name="password" />
-    <input type="button" class="btn red" ng-click="loginCheck()" value="Log in" />
 
+    <div ng-class="{ 'error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+        <label>Wachtwoord:</label>
+        <input placeholder="Password" class="control" type="password" ng-model="password" name="password" required />
+        <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" class="help">Je wachtwoord is nodig.</p>
+    </div>
+
+    <input type="button" class="btn red" ng-click="loginCheck()" value="Log in" ng-disabled="loginForm.$invalid" />
+</form>
+
+<form autocomplete="off" name="codeForm" novalidate>
     <h1><span>Open direct een</span> Pres</h1>
-    <input type="password" placeholder="Code" ng-model="presCode" />
-    <h1 ng-if="wrongCode"><span class="wrong">{{ wrongCode }}</span></h1>
-    <input type="button" class="btn blue" ng-click="loginCode()" value="Open pres" />
 
-    <input type="button" class="btn default" slide-toggle="#addUser" value="+" />
-    <input type="button" class="btn default" slide-toggle="#forgotPass" value="?" />
-
-    <div id="addUser" class="slideable foldout" easing="linear" duration=".3s">
-        <h1><span>Maak een nieuw </span>Account <span>aan</span></h1>
-        <input placeholder="Username" type="text" ng-model="user.username" />
-        <input placeholder="Password" type="password" ng-model="user.password" />
-        <input placeholder="Email" type="email" name="email" />
-        <input type="button" class="btn green" ng-click="save()" value="Maak aan" />
+    <div ng-class="{ 'error' : codeForm.code.$invalid && !codeForm.code.$pristine }">
+        <label>Code:</label>
+        <input placeholder="Code" class="control" type="password" ng-model="code" name="code" required //>
+        <p ng-show="codeForm.code.$invalid && !codeForm.code.$pristine" class="help">Je code van de pres is nodig.</p>
     </div>
 
-    <div id="forgotPass" class="slideable foldout" easing="linear" duration=".3s">
-        <h1><span>Passwoord </span>Vergeten<span>?</span></h1>
-        <input placeholder="Email" type="email" name="email" />
-        <input type="button" class="btn green" ng-click="sendPass()" value="Stuur" />
+    <input type="button" class="btn blue" ng-click="loginCode()" value="Open pres" ng-disabled="codeForm.$invalid" />
+</form>
+
+<form id="addUser" autocomplete="off" name="addUser" novalidate class="slideable foldout" easing="linear" duration=".3s">
+    <h1><span>Maak een nieuw </span>Account <span>aan</span></h1>
+
+    <div ng-class="{ 'error' : addUser.user.$invalid && !addUser.user.$pristine }">
+        <label>gebruikersnaam:</label>
+        <input placeholder="Username" class="control" type="text" ng-model="user.username" name="user" ng-minlength="3" ng-maxlength="10" required />
+            <p ng-show="addUser.user.$error.minlength" class="help">Je gebruikersnaam is te kort.</p>
+            <p ng-show="addUser.user.$error.maxlength" class="help">je gebruikersnaam is te lang.</p>
     </div>
+
+    <div ng-class="{ 'error' : addUser.pass.$invalid && !addUser.pass.$pristine }">
+        <label>Wachtwoord:</label>
+        <input placeholder="Password" class="control" type="password" ng-model="user.password" name="pass" ng-minlength="3" ng-maxlength="10" required />
+            <p ng-show="addUser.pass.$error.minlength" class="help">Je wachtwoord is te kort.</p>
+            <p ng-show="addUser.pass.$error.maxlength" class="help">Je wachtwoord is te lang.</p>
+    </div>
+
+    <div ng-class="{ 'error' : addUser.email.$invalid && !addUser.email.$pristine }">
+        <label>Email:</label>
+        <input placeholder="Email" class="control" type="email" ng-model="user.email" name="email" required />
+        <p ng-show="addUser.email.$invalid && !addUser.email.$pristine" class="help">Vul je emailadres in.</p>
+    </div>
+
+    <input class="btn green" type="submit" ng-click="addUser()" value="Maak aan" ng-disabled="addUser.$invalid" />
+</form>
+
+<form id="forgotPass" autocomplete="off" name="forgotPass" novalidate class="slideable foldout" easing="linear" duration=".3s">
+    <h1><span>Wachtwoord </span>Vergeten<span>?</span></h1>
+
+    <div ng-class="{ 'error' : forgotPass.email.$invalid && !forgotPass.email.$pristine }">
+        <label>Wachtwoord:</label>
+        <input placeholder="Email" class="control" type="email" ng-model="email" name="email" required />
+        <p ng-show="forgotPass.email.$invalid && !forgotPass.email.$pristine" class="help">Vul je emailadres in.</p>
+    </div>
+
+    <input type="button" class="btn green" ng-click="sendPass()" value="Stuur" ng-disabled="forgotPass.$invalid" />
 </form>

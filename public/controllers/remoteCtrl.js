@@ -29,8 +29,10 @@ remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval'
     }, 1000);
 
     $scope.loginCheck = function () {
-        document.loginForm.action = "/login";
-        document.loginForm.submit();
+        if ($scope.loginForm.$valid) {
+            document.loginForm.action = "/login";
+            document.loginForm.submit();
+        }
     };
 
     $scope.loginCode = function () {
@@ -48,7 +50,7 @@ remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval'
         }
     };
 
-    $scope.save = function () {
+    $scope.addUser = function () {
         if ($scope.user!=null) {
             console.log($scope.user);
             Passport.create($scope.user)
