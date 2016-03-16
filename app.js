@@ -13,7 +13,7 @@ mongoose.connect('mongodb://localhost/remotepres');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, '/public/html/views'));
+app.set('views', path.join(__dirname, '/public/views'));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

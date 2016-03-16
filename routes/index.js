@@ -16,7 +16,7 @@ module.exports = function(passport){
 
 	/* Handle Login POST */
 	router.post('/login', passport.authenticate('login', {
-		successRedirect: '/home.html',
+		successRedirect: '/secure',
 		failureRedirect: '/',
 		failureFlash : true  
 	}));
@@ -37,6 +37,10 @@ module.exports = function(passport){
 	router.get('/home', isAuthenticated, function(req, res){
 		res.render('home', { user: req.user });
 	});
+    
+    router.get('/secure', isAuthenticated, function(req, res) {
+        res.sendfile(path.join(__dirname, '../public/views/', 'secure.html'));
+    });
 
 	/* Handle Logout */
 	router.get('/signout', function(req, res) {

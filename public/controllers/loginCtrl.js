@@ -24,15 +24,15 @@ loginCtrl.controller('loginCtrl', ['$scope', '$rootScope', '$http', 'messagesSer
 
     $scope.canSubmit = function() {
         if($scope.isLogin) {
-            if($scope.user.email !== undefined && $scope.user.password !== undefined &&
-                $scope.user.email !== '' && $scope.user.password !== '') {
+            if($scope.user.username !== undefined && $scope.user.password !== undefined &&
+                $scope.user.username !== '' && $scope.user.password !== '') {
                 return true;
             }
             else return false;
         }
         else {
-            if(!$scope.checkMatch() && $scope.newUser.email !== undefined && $scope.newUser.password !== undefined &&
-                $scope.newUser.email !== '' && $scope.newUser.password !== '') {
+            if(!$scope.checkMatch() && $scope.newUser.username !== undefined && $scope.newUser.password !== undefined &&
+                $scope.newUser.username !== '' && $scope.newUser.password !== '') {
                 return true;
             }                
             else {
@@ -41,9 +41,9 @@ loginCtrl.controller('loginCtrl', ['$scope', '$rootScope', '$http', 'messagesSer
         }
     }
 
-    $scope.createUser = function(email, password, role) {
+    $scope.createUser = function(username, password, role) {
 
-        var request = $http.post('/register', {email: email, password: password, role: role});
+        var request = $http.post('/register', {username: username, password: password, role: role});
 
         return request.then(function(response) {
 //            if(response.data.error === 1) {
@@ -68,17 +68,17 @@ loginCtrl.controller('rootCtrl', ['$scope', '$http', function ($scope, $http) {
         console.log(response);
         if(response.data.loggedIn === 1) {
             $scope.isLoggedIn = true;
-            $scope.email = response.data.user.email;
+            $scope.username = response.data.user.username;
         }
         else {
             $scope.isLoggedIn = false;
-            $scope.email = "onbekende";
+            $scope.username = "onbekende";
         }
     });
 
-    $scope.login = function(email, password) {
+    $scope.login = function(username, password) {
 
-        var request = $http.post('/login', {email: email, password: password});
+        var request = $http.post('/login', {username: username, password: password});
 
         return request.then(function(response) {
             if(response.data.error === 1) {
@@ -87,8 +87,7 @@ loginCtrl.controller('rootCtrl', ['$scope', '$http', function ($scope, $http) {
             else {
                 $scope.isLoggedIn = true;
                 window.location.href = '#/secure';
-                $scope.email = response.data.user;
-                console.log(response.data);
+                $scope.username = response.data.user;
                 //logger.success("Welcome " + response.data.user + "!");
             }
         });        

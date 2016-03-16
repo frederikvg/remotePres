@@ -3,12 +3,12 @@
         
     </p>
     <br/>
-    <form class="form-horizontal" ng-show="isLogin">
+    <form action="/login" method='POST' class="form-horizontal" ng-show="isLogin">
         <h1><span>log</span>In</h1>
         <div>
-            <label for="inputEmail">Email</label>
+            <label for="inputUsername">Gebruikersnaam</label>
             <div>
-                <input type="email" name="email" class="" ng-model="user.email">
+                <input type="text" name="username" class="" ng-model="user.username">
             </div>
         </div>
         <div>
@@ -19,17 +19,16 @@
         </div>
         <div>
             <h1>
-                <input type="submit" value="Login" id="da-login-submit" class="btn green" 
-                    ng-disabled="!canSubmit()" ng-click="login(user.email, user.password)">
+                <input type="submit" value="Login" id="da-login-submit" class="btn green" />
             </h1>
         </div>
     </form>
     <form ng-show="!isLogin">
         <h1><span>maak</span>Aan</h1>
         <div>                                    
-            <label>Email</label>
+            <label>Gebruikersnaam</label>
             <div>
-                <input type="email" class="" ng-model="newUser.email">                                        
+                <input type="text" class="" ng-model="newUser.username">                                        
             </div>                                    
         </div>
         <div>
@@ -49,7 +48,7 @@
             <h1>
                 <input type="submit" value="Maak aan" class="btn green" 
                 ng-disabled="!canSubmit()"
-                ng-click="createUser(newUser.email, newUser.password, selectedRole)">
+                ng-click="createUser(newUser.username, newUser.password, selectedRole)">
             </h1>
         </div>
     </form>    
