@@ -1,6 +1,26 @@
 'use strict';
 
-var remotePres = angular.module('remotePres', ['remoteCtrl', 'remoteService']);
+var remotePres = angular.module('remotePres', ['remoteCtrl', 'remoteService', 'ngRoute', 'secureCtrl', 'loginCtrl', 'messagesService']);
+
+remotePres.config( 
+	['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/login', {
+            templateUrl: '/views/enter.html',
+            controller: 'loginCtrl'
+        })
+        .when('/unsecured', {
+            templateUrl: '/views/unsecure.html',
+            controller: 'unsecureCtrl'
+        })
+        .when('/secure', {
+            templateUrl: '/views/secure.html',
+            controller: 'secureCtrl'
+        })
+        .otherwise({
+          redirectTo: '/login'
+        }); 
+	}
+]);
 
 remotePres.directive('fbLogin', function () {
     return {

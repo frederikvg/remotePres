@@ -36,7 +36,7 @@ remoteCtrl.controller('remoteCtrl', ['socket', '$scope', '$timeout', '$interval'
     };
 
     $scope.loginCode = function () {
-        key = $scope.presCode;
+        key = $scope.code;
         console.log('pass: ' + key);
         if (key) {
             socket.emit('load', {

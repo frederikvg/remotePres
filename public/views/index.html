@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app='remotePres'>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui'>
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+
+    <title>remotePres</title>
+
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-animate.min.js'></script> 
+    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/js/reveal.min.js'></script>
+    <script src='/socket.io/socket.io.js'></script>
+
+    <link rel='stylesheet' href='stylesheets/style.css' />
+    <link rel="stylesheet" href='stylesheets/bootstrap.min.css' />
+    <link rel="stylesheet" href='stylesheets/bootstrap-responsive.min.css' />
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/reveal.min.css' />
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/theme/black.min.css' />
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css' />
+
+    <script src='js/app.js'></script>
+    <script src='controllers/remoteCtrl.js'></script>
+    <script src='controllers/loginCtrl.js'></script>
+    <script src='controllers/secureCtrl.js'></script>
+    <script src='services/remoteService.js'></script>
+    <script src='services/messagesService.js'></script>
+</head>
+<body ng-controller='rootCtrl'>
+    <div class="page-header">
+        <h1><span>remote</span>Pres</h1>
+    </div>
+    <div>
+        <div> Hallo {{user.email}}! <br/><br/></div>
+        <div ng-switch on="isLoggedIn">
+            <ul class="menu" ng-switch-when="false">
+                <li><a href="#/login">Login / Registreer</a></li>
+                <li><a href="#/unsecured">Unsecured Content</a></li>
+            </ul>
+            <ul class="menu" ng-switch-when="true"> 
+                <li><a href="#/unsecured">Unsecured Content</a></li>                   
+                <li><a href="#/secure">Beveiligde Content</a></li>
+            </ul>            
+        </div>
+        <div class="container-fluid" ng-view></div>
+    </div>
+</body>
+</html>
