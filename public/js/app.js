@@ -6,21 +6,39 @@ remotePres.config(
 	['$routeProvider', function($routeProvider) {
         $routeProvider.when('/login', {
             templateUrl: '/views/enter.html',
-            controller: 'loginCtrl'
+            controller: 'loginCtrl',
+            access: {restricted: false}
         })
         .when('/unsecured', {
             templateUrl: '/views/unsecure.html',
-            controller: 'unsecureCtrl'
+            access: {restricted: false}
         })
         .when('/secure', {
             templateUrl: '/views/secure.html',
-            controller: 'secureCtrl'
+            controller: 'secureCtrl',
+            access: {restricted: true}
         })
         .otherwise({
           redirectTo: '/login'
         }); 
 	}
 ]);
+
+
+remotePres.run(function ($rootScope, $location, $route, AuthService) {
+
+    //Bij een route change
+    $rootScope.$on('$routeChangeStart',
+            function (event, next, current) {
+                AuthService.getUserStatus();
+                if (next.$$route.access.restricted && !AuthService.isLoggedIn()) {
+                    console.log(next.$$route);
+                    console.log('logged in: ' + !AuthService.isLoggedIn());
+                    $location.path('/login');
+                    $route.reload();
+                }
+            });
+});
 
 remotePres.directive('fbLogin', function () {
     return {

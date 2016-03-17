@@ -16,6 +16,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
     display: block;
 }
 
+label {
+    cursor: default !important;
+}
+
 body {
     line-height: 1;
 }
@@ -99,9 +103,10 @@ form {
     border-radius: 6px;
     padding: 20px;
     padding-top: 30px;
-    width: 350px;
+    width: 400px;
     margin: 20px auto !important;
     box-shadow: 8px 8px 0px rgba(0,0,0,.1);
+    text-align: right;
 }
 
 form#codeForm {
@@ -118,14 +123,16 @@ form#codeForm {
 }
 
 input {
-    width: 88%;
     background: #F5F5F5;
-    border: 0;
-    padding: 20px;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    border: 1px solid #eee;
-    font-size: 17px;
+    border: 0 !important;
+    border-radius: 6px !important;
+    margin-bottom: 10px !important;
+    border: 1px solid #eee !important;
+    font-size: 17px !important;
+}
+
+div.input-group span {
+    padding-bottom: 3px;
 }
 
 section {
@@ -178,7 +185,7 @@ div.reveal {
     width: 100%;
     padding: 20px;
     border-radius: 6px;
-    border: 0;
+    border: 0 !important;
     font-size: 1.2em;
     color: #fff;
     text-shadow: 1px 1px 0px rgba(0,0,0,.1);

@@ -62,13 +62,13 @@ loginCtrl.controller('loginCtrl', ['$scope', '$rootScope', '$http', 'messagesSer
 
 loginCtrl.controller('rootCtrl', ['$scope', '$http', function ($scope, $http) {
     
-    var request = $http.get('/getUserDetails');
+    var request = $http.get('/status');
 
     request.then(function(response) {
         console.log(response);
-        if(response.data.loggedIn === 1) {
+        if(response.data.status === true) {
             $scope.isLoggedIn = true;
-            $scope.username = response.data.user.username;
+            $scope.username = response.data.user;
         }
         else {
             $scope.isLoggedIn = false;

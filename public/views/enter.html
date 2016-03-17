@@ -5,17 +5,13 @@
     <br/>
     <form action="/login" method='POST' class="form-horizontal" ng-show="isLogin">
         <h1><span>log</span>In</h1>
-        <div>
-            <label for="inputUsername">Gebruikersnaam</label>
-            <div>
-                <input type="text" name="username" class="" ng-model="user.username">
-            </div>
+        <div class="input-group">
+            <span>Gebruikersnaam:</span>
+            <input type="text" name="username" class="" ng-model="user.username" />
         </div>
-        <div>
-            <label for="inputPassword">Wachtwoord</label>
-            <div>
-                <input type="password" name="password" class="" ng-model="user.password">
-            </div>
+        <div class="input-group">
+            <span>Wachtwoord:</span>
+            <input type="password" name="password" class="" ng-model="user.password" />
         </div>
         <div>
             <h1>
@@ -23,32 +19,37 @@
             </h1>
         </div>
     </form>
-    <form ng-show="!isLogin">
+    <form action="/signup" method='POST' ng-show="!isLogin">
         <h1><span>maak</span>Aan</h1>
-        <div>                                    
-            <label>Gebruikersnaam</label>
-            <div>
-                <input type="text" class="" ng-model="newUser.username">                                        
-            </div>                                    
+        <div class="input-group">                                 
+            <span>Gebruikersnaam:</span>
+            <input type="text" class="" ng-model="newUser.username" name="username" />                                   
         </div>
-        <div>
-            <label>Wachtwoord</label>
-            <div>
-                <input type="text" ng-model="newUser.password">
-            </div>
-        </div>                    
-        <div>
-            <label>Herhaal Wachtwoord</label>
-            <div>
-                <input type="text" ng-model="newUser.repeatPassword" class="" >
-                <span class="text-error" ng-show='checkMatch()'>Wachtwoord komt niet overeen!</span>
-            </div>
+        <div class="input-group">
+            <span>Wachtwoord:</span>
+            <input type="password" ng-model="newUser.password" name="password" />
+        </div>  
+        <div class="input-group">
+            <span>Herhaal Wachtwoord:</span>
+            <input type="password" ng-model="newUser.repeatPassword" name="password" />
+        </div>  
+            <span class="text-error" ng-show='checkMatch()'>Wachtwoord komt niet overeen!</span>
+        <div class="input-group">
+            <span>Email:</span>
+            <input type="email" class="" name="email" />
+        </div>   
+        <div class="input-group">
+            <span>Voornaam:</span>
+            <input type="text" class="" name="firstName" />
+        </div>   
+        <div class="input-group">
+            <span>Achternaam:</span>
+            <input type="text" class="" name="lastName" />
         </div>
         <div>
             <h1>
                 <input type="submit" value="Maak aan" class="btn green" 
-                ng-disabled="!canSubmit()"
-                ng-click="createUser(newUser.username, newUser.password, selectedRole)">
+                ng-disabled="!canSubmit()">
             </h1>
         </div>
     </form>    
