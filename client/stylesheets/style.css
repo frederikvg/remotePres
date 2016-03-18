@@ -47,7 +47,7 @@ input:-webkit-autofill {
 }
 
 input:focus, select:focus, textarea:focus, button:focus {
-    outline: none;
+    outline: none !important;
 }
 
 /* Main */
@@ -61,27 +61,41 @@ body {
 }
 
 *::-webkit-input-placeholder {
-    color: #9E9E9E;
+    color: #ffffff;
 }
 
 *:-moz-placeholder {
-    color: #9E9E9E;
+    color: #ffffff;
 }
 
 *::-moz-placeholder {
-    color: #9E9E9E;
+    color: #ffffff;
 }
 
 *:-ms-input-placeholder {
-    color: #9E9E9E;
+    color: #ffffff;
+}
+a:link, a:visited {
+    color: #777 !important;
+    text-decoration: none !important;
+}
+
+a:hover, a:active {
+    color: #333 !important;
+    text-decoration: none !important;
 }
 
 h1 {
     text-align: center;
-    font-size: 1.4em;
-    font-weight: 700;
+    font-size: 25px !important;
+    font-weight: 700 !important;
     color: inherit;
-    margin: 24px 0;
+    margin: 0 0 35px 0 !important;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 0px !important;
 }
 
 h1 > span {
@@ -122,13 +136,59 @@ form#codeForm {
     z-index: 10;
 }
 
+.loginLogo {
+    width: 50px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25px;
+    background-color: #f5f5f5;
+}
+
+.container .text-footer {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #777777;
+}
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.topnav {
+    padding-bottom: 10px !important;
+    margin: 45px 0 40px !important;
+    border-bottom: 3px solid #AED5B9 !important;
+}
+.projectLogo {
+    height: 36px;
+    margin: 0 10px 0 0;
+    display: inline-block !important;
+}
+
+.projectTitle {
+    display: inline-block !important;
+}
+
+.navbar-default .navbar-brand {
+    margin-top: -7px !important;
+}
+
 input {
     background: #F5F5F5;
     border: 0 !important;
     border-radius: 6px !important;
-    margin-bottom: 10px !important;
+    margin-top: 10px !important;
     border: 1px solid #eee !important;
     font-size: 17px !important;
+}
+
+.input-group {
+    width: 100%;
 }
 
 div.input-group span {
@@ -171,16 +231,12 @@ div.reveal {
 }
 
 /* loginForm */
-#loginCtrl {
+.loginForm {
   text-align: center;
 }
 
-.foldout {
-    padding-bottom: 3px;
-    text-align: center;
-}
-
 .btn {
+    margin-top: 20px !important;
     position: relative;
     width: 100%;
     padding: 20px;
@@ -193,39 +249,7 @@ div.reveal {
 
 .btn:active {
     top: 3px;
-    box-shadow: none;
-}
-
-.default {
-    background: #F5F5F5 !important;
-    box-shadow: 0px 3px 0px #CCCCCC !important;
-    width: 100px !important;
-    color: #9E9E9E !important;
-    margin-top: 10px !important;
-}
-
-.red {
-    background: rgba(242,105,100,1) !important;
-    box-shadow: 0px 3px 0px rgba(193,82,78,1) !important;
-    margin-top: 3px !important;
-}
-
-.red:disabled {
-    background: rgba(242,105,100,.4) !important;
-    box-shadow: 0px 3px 0px rgba(193,82,78,.4) !important;
-    margin-top: 3px !important;
-}
-
-.blue {
-    background: rgba(0,172,238,1) !important;
-    box-shadow: 0px 3px 0px rgba(0,141,195,1) !important;
-    margin-top: 3px !important;
-}
-
-.blue:disabled {
-    background: rgba(0,172,238,.4) !important;
-    box-shadow: 0px 3px 0px rgba(0,141,195,.4) !important;
-    margin-top: 3px !important;
+    box-shadow: none !important;
 }
 
 .green {
@@ -242,75 +266,7 @@ div.reveal {
     margin-top: 10px !important;
 }
 
-.error .control {
-    border-color: #a94442;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-}
-
-.error .help {
+.error {
     color: #a94442;
-    margin-bottom: 10px;
-}
-
-
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
-}
-
-.menu:before {
-  content: "[";
-}
-
-.menu:after {
-  content: "]";
-}
-
-.menu > li {
-  display: inline;
-}
-
-.menu > li:before {
-  content: "|";
-  padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-  content: "";
-  padding: 0;
-}
-
-.seedlarge {
-  min-height:40px;
-}
-
-.view-enter-setup, .view-leave-setup {
-  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
-}
-
-.view-enter-setup {
-  opacity:0;
-  left:50px;
-  width:100%;
-}
-.view-enter-setup.view-enter-start {
-  left:0;
-  opacity:1;
-}
-
-.view-leave-setup {
-  position:absolute;
-  left:0;
-  width:100%;
-  opacity:1;
-}
-.view-leave-setup.view-leave-start {
-  left:-50px;
-  opacity:0;
+    font-size: 13px;
 }

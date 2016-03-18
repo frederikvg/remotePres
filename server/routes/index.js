@@ -8,32 +8,28 @@ var isAuthenticated = function (req, res, next) {
 	res.redirect('/');
 };
 
-module.exports = function(passport){
+module.exports = function(passport) {
 
-	/* Handle Login POST */
+	/* GET login pagina. */
+	router.get('/', function(req, res) {
+        res.sendfile(path.join(__dirname, '../../client/views/', 'index.html'));
+	});
+
+	/* Login POST verwerken*/
 	router.post('/login', passport.authenticate('login', {
-		successRedirect: '/#/secure',
-		failureRedirect: '/',
+		successRedirect: '/#/home',
+		failureRedirect: '/#/login',
 		failureFlash : true  
 	}));
-
-	/* GET Registration Page */
-	router.get('/signup', function(req, res){
-        res.sendfile(path.join(__dirname, '../public/views/', 'login.html'));
-	});
 
 	/* Handle Registration POST */
 	router.post('/signup', passport.authenticate('signup', {
-		successRedirect: '/#/secure',
-		failureRedirect: '/signup',
+		successRedirect: '/#/home',
+		failureRedirect: '/login',
 		failureFlash : true  
 	}));
-    
-    router.get('/secure', isAuthenticated, function(req, res) {
-        res.redirect('/#/secure');
-    });
 
-	/* Handle Logout */
+	/* Logout verwerken */
 	router.get('/signout', function(req, res) {
 		req.logout();
 		res.redirect('/');
@@ -48,7 +44,7 @@ module.exports = function(passport){
         }
         res.status(200).json({
             status: true,
-            user: req.user.firstName + ' ' + req.user.lastName
+            user: req.user
         });
     });
     

@@ -53,6 +53,7 @@ remoteService.factory('AuthService', ['$q', '$timeout', '$http', function ($q, $
                 .success(function (data) {
                     if (data.status) {
                         user = true;
+                        console.log(data);
                     } else {
                         user = false;
                     }
@@ -63,19 +64,4 @@ remoteService.factory('AuthService', ['$q', '$timeout', '$http', function ($q, $
                 });
     };
 }]);
-                
-                
-remoteService.factory('Passport', ['$http', function ($http) {
-    return {
-        get: function () {
-            return $http.get('/passports');
-        },
-        create: function (newUser) {
-            console.log(newUser);
-            return $http.post('/passport', newUser);
-        },
-        delete: function (id) {
-            return $http.delete('passport/' + id);
-        }
-    }
-}]);
+

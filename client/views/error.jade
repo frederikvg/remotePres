@@ -6,3 +6,7 @@ html
     link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
   body
     block content
+  div(class='container')
+    h1= message
+    h2= error.status
+    pre #{error.stack}

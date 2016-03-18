@@ -2,7 +2,7 @@
 
 var loginCtrl = angular.module('loginCtrl', []);
 
-loginCtrl.controller('loginCtrl', ['$scope', '$rootScope', '$http', 'messagesService', function ($scope, $rootScope, $http, messagesService) {
+loginCtrl.controller('loginCtrl', ['$scope', '$rootScope', '$http', 'messagesService', 'AuthService', function ($scope, $rootScope, $http, messagesService, AuthService) {
 
     $scope.messages = messagesService.messages; 
 
@@ -20,7 +20,7 @@ loginCtrl.controller('loginCtrl', ['$scope', '$rootScope', '$http', 'messagesSer
             $scope.isLogin = true;
             $scope.buttonText = $scope.messages["register"];
         }
-    }
+    };
 
     $scope.canSubmit = function() {
         if($scope.isLogin) {
@@ -39,40 +39,55 @@ loginCtrl.controller('loginCtrl', ['$scope', '$rootScope', '$http', 'messagesSer
                 return false;
             }
         }
-    }
-
-    $scope.createUser = function(username, password, role) {
-
-        var request = $http.post('/register', {username: username, password: password, role: role});
-
-        return request.then(function(response) {
-//            if(response.data.error === 1) {
-//                logger.error(response.data.user + $scope.messages["alreadyRegistered"]);
-//            }
-//            else {
-//                logger.success(response.data.user + $scope.messages["registerSuccess"]);
-//            }
-        });
-    };    
+    };  
 
     $scope.checkMatch = function() {
         return $scope.newUser.password !== $scope.newUser.repeatPassword;
-    } 
+    };
+    
+    $scope.login = function () {
+
+      // initial values
+      $scope.error = false;
+      $scope.disabled = true;
+
+      // call login from service
+      AuthService.login($scope.user.username, $scope.user.password)
+        // handle success
+        .then(function () {
+          $location.path('/secure');
+          $scope.disabled = false;
+          $scope.loginForm = {};
+        })
+        // handle error
+        .catch(function () {
+          $scope.error = true;
+          $scope.errorMessage = "Invalid username and/or password";
+          $scope.disabled = false;
+          $scope.loginForm = {};
+        });
+
+    };
 }]);
+
+
+
+
 
 loginCtrl.controller('rootCtrl', ['$scope', '$http', function ($scope, $http) {
     
+    $scope.user = {};
     var request = $http.get('/status');
 
     request.then(function(response) {
         console.log(response);
         if(response.data.status === true) {
             $scope.isLoggedIn = true;
-            $scope.username = response.data.user;
+            $scope.user = response.data.user;
         }
         else {
             $scope.isLoggedIn = false;
-            $scope.username = "onbekende";
+            $scope.user.lastName = "onbekende";
         }
     });
 
