@@ -1,0 +1,17 @@
+<div class='reveal' ng-controller="remoteCtrl">
+    <div class='slides'>
+        <section data-background='{{ s.background }}' ng-repeat='s in slides'>
+            <div class='titleText' ng-if='s.title'>{{ s.title }}</div>
+            <div class='contentText'>
+                {{ s.content }}
+                <video data-autoplay ng-if='s.video'>
+                    <source data-src='{{ s.video }}' type='video/mp4' />
+                </video>
+                <img data-src='{{ s.image }}' ng-if='s.image' />
+            </div>
+        </section>
+    </div>
+</div>
+<script>
+    Reveal.initialize();
+</script>

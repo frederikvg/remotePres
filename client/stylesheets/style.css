@@ -43,7 +43,7 @@ table {
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px #EEEEEE inset;
+    -webkit-box-shadow: 0 0 0px 1000px #FFFFFF inset !important;
 }
 
 input:focus, select:focus, textarea:focus, button:focus {
@@ -53,28 +53,9 @@ input:focus, select:focus, textarea:focus, button:focus {
 /* Main */
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-    background: linear-gradient(130deg, #63B47A 20%, #CCCCCC 100%) no-repeat center center fixed !important;
+    background: linear-gradient(130deg, #63B47A 20%, #FFFFFF 100%) no-repeat center center fixed !important;
 }
 
-* {
-    font-family: "Helvetica Neue", Helvetica, Arial;
-}
-
-*::-webkit-input-placeholder {
-    color: #ffffff;
-}
-
-*:-moz-placeholder {
-    color: #ffffff;
-}
-
-*::-moz-placeholder {
-    color: #ffffff;
-}
-
-*:-ms-input-placeholder {
-    color: #ffffff;
-}
 a:link, a:visited {
     color: #777 !important;
     text-decoration: none !important;
@@ -89,68 +70,27 @@ h1 {
     text-align: center;
     font-size: 25px !important;
     font-weight: 700 !important;
-    color: inherit;
     margin: 0 0 35px 0 !important;
-}
-
-h2 {
-    text-align: center;
-    margin-top: 0px !important;
 }
 
 h1 > span {
     font-weight: 200;
 }
 
-h1 > span.wrong {
-    color: #F26964;
+.container {
+    height: 80%;
 }
-
-i {
-    margin: 10px;
-    color: rgba(255,255,255,.4);
-}
-
-form {
-    color: #6F6F6F;
-    background: rgba(255,255,255,.4);
-    border-radius: 6px;
-    padding: 20px;
-    padding-top: 30px;
-    width: 400px;
-    margin: 20px auto !important;
-    box-shadow: 8px 8px 0px rgba(0,0,0,.1);
-    text-align: right;
-}
-
-form#codeForm {
-    color: #666666;
-    background: rgba(255,255,255,.4);
-    border-radius: 6px;
-    padding: 20px;
-    width: 40%;
-    position: fixed;
-    left: 50%;
-    margin-left: -20%;
-    top: 40%;
-    z-index: 10;
-}
-
-.loginLogo {
-    width: 50px;
-}
-
 .footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 25px;
+    height: 22px;
     background-color: #f5f5f5;
 }
 
-.container .text-footer {
+.text-footer {
     margin: 6px 0;
-    font-size: 14px;
+    font-size: 12px;
     color: #777777;
 }
 
@@ -164,6 +104,18 @@ form#codeForm {
     margin: 45px 0 40px !important;
     border-bottom: 3px solid #AED5B9 !important;
 }
+
+.navbar-form {
+    margin-right: -57px !important;
+}
+.navbar-form .form-control {
+    width: 100% !important;
+}
+
+.navbar-form .form-group {
+    width: 60% !important;
+}
+
 .projectLogo {
     height: 36px;
     margin: 0 10px 0 0;
@@ -178,23 +130,16 @@ form#codeForm {
     margin-top: -7px !important;
 }
 
+.navbar-btn {
+    margin: 8px 0px 8px 15px !important;
+}
+
 input {
-    background: #F5F5F5;
-    border: 0 !important;
     border-radius: 6px !important;
-    margin-top: 10px !important;
-    border: 1px solid #eee !important;
     font-size: 17px !important;
 }
 
-.input-group {
-    width: 100%;
-}
-
-div.input-group span {
-    padding-bottom: 3px;
-}
-
+/*
 section {
     position: absolute;
     top: 0 !important;
@@ -229,44 +174,82 @@ div.reveal {
     -webkit-transition: 0.3s;
     transition: 0.3s;
 }
+*/
+
 
 /* loginForm */
-.loginForm {
-  text-align: center;
+.center-content {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.center-text {
+    text-align: center;
+    margin-top: 0px !important;
+}
+
+.login-logo {
+    width: 50px;
+    margin-bottom: 15px;
+}
+
+.login-div {
+    text-align: center;
+}
+
+.login-form {
+    margin: 20px auto !important;
+    padding: 20px;
+    padding-top: 30px;
+    width: 450px;
+    color: #6F6F6F;
+    background: rgba(255,255,255,.4);
+    border-radius: 6px;
+    box-shadow: 8px 8px 0px rgba(0,0,0,.1);
+    text-align: right;
+}
+
+.input-form {
+    display: inline-block !important;
+    width: auto !important;
 }
 
 .btn {
-    margin-top: 20px !important;
     position: relative;
-    width: 100%;
     padding: 20px;
     border-radius: 6px;
-    border: 0 !important;
     font-size: 1.2em;
-    color: #fff;
     text-shadow: 1px 1px 0px rgba(0,0,0,.1);
 }
 
-.btn:active {
+.btn-default {
+    color: #777 !important;
+}
+
+.btn-green:active {
     top: 3px;
     box-shadow: none !important;
 }
 
-.green {
+.btn-green {
     background: rgba(99,180,122,1) !important;
     box-shadow: 0px 3px 0px rgba(84,158,63,1) !important;
-    width: 49% !important;
-    margin-top: 10px !important;
+    color: #fff;
+    border: 0 !important;
 }
 
-.green:disabled {
+.btn-green:disabled {
     background: rgba(99,180,122,.4) !important;
     box-shadow: 0px 3px 0px rgba(84,158,63,.4) !important;
-    width: 49% !important;
+}
+
+.btn-form {
+    width: 50% !important;
     margin-top: 10px !important;
 }
 
 .error {
     color: #a94442;
     font-size: 13px;
+    margin: -4px 15px 10px 0;
 }

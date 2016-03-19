@@ -1,6 +1,6 @@
 'use strict';
 
-var remotePres = angular.module('remotePres', ['remoteCtrl', 'remoteService', 'ngRoute', 'secureCtrl', 'loginCtrl', 'messagesService']);
+var remotePres = angular.module('remotePres', ['rootCtrl', 'loginCtrl', 'remoteCtrl', 'remoteService', 'messagesService', 'ngRoute']);
 
 remotePres.config( 
 	['$routeProvider', function($routeProvider) {
@@ -9,8 +9,16 @@ remotePres.config(
                 templateUrl: '/views/home.html',
                 access: {restricted: false}
             })
+            .when('/over', {
+                templateUrl: '/views/over.html',
+                access: {restricted: false}
+            })
             .when('/login', {
                 templateUrl: '/views/enter.html',
+                access: {restricted: false}
+            })
+            .when('/reveal', {
+                templateUrl: '/views/reveal.html',
                 access: {restricted: false}
             })
             .when('/user', {
@@ -49,5 +57,13 @@ remotePres.directive('fbFooter', function () {
         restrict: 'A',
         transclude: true,
         templateUrl: 'views/footer.html'
+    };
+});
+
+remotePres.directive('fbReveal', function () {
+    return {
+        restrict: 'A',
+        transclude: true,
+        templateUrl: 'views/reveal.html'
     };
 });

@@ -1,59 +1,54 @@
-<div ng-controller="loginCtrl" class="loginForm">
-    <p>
-        
-    </p>
-    <br/>
-    <form action="/login" method="POST" class="form-horizontal" ng-show="isLogin">
-        <h2><img class="loginLogo" src="../img/logo.png"></h2>
+<div ng-controller="loginCtrl" class="center-content">
+    <form action="/login" method="post" class="login-form" ng-show="isLogin">
+        <div class="center-text">
+            <img class="login-logo" src="../img/logo.png">
+        </div>
         <h1><span>Log in op je remote</span>Pres</h1>
-        <div class="input-group">
+        <div class="form-group">
             <span>Gebruikersnaam: </span>
-            <input type="text" name="username" class="" ng-model="user.username" />
+            <input type="text" name="username" class="form-control input-form" ng-model="user.username" />
         </div>
-        <div class="input-group">
+        <div class="form-group">
             <span>Wachtwoord: </span>
-            <input type="password" name="password" class="" ng-model="user.password" />
+            <input type="password" name="password" class="form-control input-form" ng-model="user.password" />
         </div>
-        <div>
-            <h2>
-                <input type="submit" value="Log in" id="da-login-submit" class="btn green" />
-            </h2>
+        <div class="center-text">
+            <input type="submit" value="Log in" id="da-login-submit" class="btn btn-green btn-form" />
         </div>
     </form>
-    <form action="/signup" method='POST' ng-show="!isLogin">
-        <h2><img class="loginLogo" src="../img/logo.png"></h2>
+    <form action="/signup" method='post' class="login-form" ng-show="!isLogin">
+        <div class="center-text">
+            <img class="login-logo" src="../img/logo.png">
+        </div>
         <h1><span>Maak een </span>Profiel <span>aan</span></h1>
-        <div class="input-group">                                 
+        <div class="form-group">                                 
             <span>Gebruikersnaam: </span>
-            <input type="text" class="" ng-model="newUser.username" name="username" />                                   
+            <input type="text" class="form-control input-form" ng-model="newUser.username" name="username" />                                   
         </div>
-        <div class="input-group">
+        <div class="form-group">
             <span>Wachtwoord: </span>
-            <input type="password" ng-model="newUser.password" name="password" />
+            <input type="password" class="form-control input-form" ng-model="newUser.password" name="password" />
         </div>  
-        <div class="input-group">
-            <span>Herhaal Wachtwoord: </span>
-            <input type="password" ng-model="newUser.repeatPassword" />
+        <div class="form-group">
+            <span>Herhaal wachtwoord: </span>
+            <input type="password" class="form-control input-form" ng-model="newUser.repeatPassword" />
         </div>  
-            <span class="error" ng-show='checkMatch()'>Wachtwoord komt niet overeen!</span>
-        <div class="input-group">
+            <div class="error" ng-show='checkMatch()'>Wachtwoord komt niet overeen!</div>
+        <div class="form-group">
             <span>Email: </span>
-            <input type="email" class="" name="email" />
+            <input type="email" class="form-control input-form" name="email" />
         </div>   
-        <div class="input-group">
+        <div class="form-group">
             <span>Voornaam: </span>
-            <input type="text" class="" name="firstName" />
+            <input type="text" class="form-control input-form" name="firstName" />
         </div>   
-        <div class="input-group">
+        <div class="form-group">
             <span>Achternaam: </span>
-            <input type="text" class="" name="lastName" />
+            <input type="text" class="form-control input-form" name="lastName" />
         </div>
-        <div>
-            <h2>
-                <input type="submit" value="Maak aan" class="btn green" 
-                ng-disabled="!canSubmit()">
-            </h2>
+        <div class="center-text">
+            <input type="submit" value="Maak aan" class="btn btn-green btn-form" ng-disabled="!canSubmit()">
         </div>
     </form>    
-    <a href ng-click="toggleLogin()">{{buttonText}}</a>
+    <a href ng-click="toggleLogin()">{{ buttonText }}</a>
 </div>
