@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var Slide = require('../models/slide');
 
 var isAuthenticated = function (req, res, next) {
 	if (req.isAuthenticated())
@@ -48,10 +49,38 @@ module.exports = function(passport) {
         });
     });
     
+    router.post('/addpres', function(req, res) {
+        var newPres = new Slide({
+           presentatie: req.body.presTitle
+        })
+        
+        newPres.save(function (err) {
+            if (err) {
+                res.send(err);
+                console.log('error');
+            }
+            res.status(200).end();
+        })
+    });
+    
+    router.post('/addpres/:id', function(req, res) {
+        Slide.update({ presentatie: req.params.id },
+            {$push:{slides: {
+                slidetitle: req.body.slideTitle, 
+                slidecontent: req.body.slideContent
+            }}},{upsert:true}, function(err, data) { 
+        });
+    });
+    
+    router.get('/slides', function (req, res) {
+        Slide.find(function (err, slides) {
+            if (err) res.send(err);
+            else res.json(slides);
+        });
+    });
+    
 	return router;
 }
-
-
 
 
 

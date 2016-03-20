@@ -1,6 +1,6 @@
 'use strict';
 
-var remotePres = angular.module('remotePres', ['rootCtrl', 'loginCtrl', 'remoteCtrl', 'remoteService', 'messagesService', 'ngRoute']);
+var remotePres = angular.module('remotePres', ['rootCtrl', 'loginCtrl', 'remoteCtrl', 'slideCtrl', 'remoteService', 'messagesService', 'ngRoute']);
 
 remotePres.config( 
 	['$routeProvider', function($routeProvider) {

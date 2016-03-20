@@ -65,3 +65,21 @@ remoteService.factory('AuthService', ['$q', '$timeout', '$http', function ($q, $
     };
 }]);
 
+remoteService.factory('addPres', ['$http', function ($http) {
+
+    return {
+        get: function () {
+            return $http.get('/slides');
+        },
+        createPres: function (newPres) {
+            return $http.post('/addpres', newPres);
+        },
+        createSlide: function (presId, newSlide) {
+            return $http.post('/addpres/' + presId, newSlide);
+        },
+        delete: function (id) {
+            return $http.delete('/addslide/' + id);
+        }
+    }
+    
+}]);

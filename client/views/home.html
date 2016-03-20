@@ -1,2 +1,26 @@
-<h1>Home</h1>
-<h4>Welkom {{user.firstName}} {{user.lastName}}.</h4>
+<div ng-controller="slideCtrl">
+    <h1>Home</h1>
+    <h4>Welkom {{user.firstName}} {{user.lastName}}.</h4>
+    <br />
+    <form>
+        <input ng-model="pres.presTitle" type="text" placeholder="pres titel..." />
+        <button type=submit ng-click="savePres()">Voeg pres toe</button>
+    </form>
+        <br />
+    </form>
+    <form>
+        <input ng-model="slide.presTitle" type="text" placeholder="pres titel..." />
+        <br />
+        <input ng-model="slide.slideTitle" type="text" placeholder="slide titel..." />
+        <br />
+        <input ng-model="slide.slideContent" type="text" placeholder="slide content" />
+        <button type=submit ng-click="saveSlide()">Voeg slide toe</button>
+    </form>
+    <div ng-repeat="presentatie in presentaties" style="border:1px solid white">
+        <h1>{{presentatie.presentatie}}</h1>
+        <h4 ng-repeat="slide in presentatie.slides">
+            {{ slide.slidetitle }} <br />
+            {{ slide.slidecontent }}
+        </h4>
+    </div>
+</div>
