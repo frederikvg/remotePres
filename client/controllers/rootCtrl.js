@@ -31,54 +31,5 @@ rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$
     $scope.isActive = function (viewLocation) { 
         return viewLocation === $location.path();
     };
-    
-    $scope.loginCode = function () {
-        key = $scope.code;
-        console.log('pass: ' + key);
-        if (key) {
-            socket.emit('load', {
-                key: key
-            });
-        } else {
-            $scope.wrongCode = 'No code entered';
-            $timeout(function () {
-                $scope.wrongCode = ''
-            }, 3000);
-        }
-    };
-    
-    socket.on('access', function (data) {
-        if (data.access === "granted") {
-            $scope.blurred = true;
-            var ignore = false;
-            window.location.href = '/#/reveal';
 
-            $(window).on('hashchange', function () {
-                if (ignore) {
-                    return;
-                }
-
-                var hash = window.location.hash;
-
-                socket.emit('slide-changed', {
-                    hash: hash,
-                    key: key
-                });
-            });
-
-            socket.on('navigate', function (data) {
-                window.location.hash = data.hash;
-                ignore = true;
-
-                $interval(function () {
-                    ignore = false;
-                }, 100);
-            });
-        } else {
-            $scope.wrongCode = 'No presentation found with this code';
-            $timeout(function () {
-                $scope.wrongCode = ''
-            }, 3000);
-        }
-    });
 }]);

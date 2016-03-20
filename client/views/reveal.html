@@ -1,17 +1,66 @@
-<div class='reveal' ng-controller="remoteCtrl">
+<!doctype html>
+<html ng-app='revealPres'>
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui'>
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+
+    <title>remotePres</title>
+
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-animate.min.js'></script> 
+    <script src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/js/reveal.min.js'></script>
+    <script src='/socket.io/socket.io.js'></script>
+
+    <style>
+        img.logo {
+            position: absolute;
+            width: 50px;
+            z-index: 1;
+            margin: 15px;
+            opacity: .5;
+        }
+        .reveal .controls .navigate-left, .reveal .controls .navigate-left.enabled {
+    border-right-color: #63B47A !important;
+        }
+        .reveal .controls .navigate-right, .reveal .controls .navigate-right.enabled {
+    border-left-color: #63B47A !important;
+        }
+        .reveal .controls .navigate-up, .reveal .controls .navigate-up.enabled {
+    border-bottom-color: #63B47A !important;
+        }
+        .reveal .controls .navigate-down, .reveal .controls .navigate-down.enabled {
+    border-top-color: #63B47A !important;
+        }
+        .reveal .progress span {
+    background: #63B47A !important;
+        }
+    </style>
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/reveal.min.css' />
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/reveal.js/3.2.0/css/theme/black.min.css' />
+
+    <script src='/js/app.js'></script>
+    <script src='/controllers/revealCtrl.js'></script>
+    <script src='/services/revealService.js'></script>
+</head>
+<body ng-controller='revealCtrl'>
+    <a href="/"><img src='../img/logo.png' class='logo' /></a>
+<div class='reveal'>
     <div class='slides'>
         <section data-background='{{ s.background }}' ng-repeat='s in slides'>
             <div class='titleText' ng-if='s.title'>{{ s.title }}</div>
             <div class='contentText'>
                 {{ s.content }}
                 <video data-autoplay ng-if='s.video'>
-                    <source data-src='{{ s.video }}' type='video/mp4' />
+                    <source ng-src='{{ s.video }}' type='video/mp4' />
                 </video>
-                <img data-src='{{ s.image }}' ng-if='s.image' />
+                <img ng-src='{{ s.image }}' ng-if='s.image' />
             </div>
         </section>
     </div>
 </div>
-<script>
-    Reveal.initialize();
-</script>
+</body>
+</html>

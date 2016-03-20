@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var secret = 'frederik';
+var secret = '';
 
 var mongoose = require('mongoose/');
 // Connect to DB
@@ -42,6 +42,14 @@ initPassport(passport);
 var routes = require('./server/routes/index')(passport);
 app.use('/', routes);
 
+/* GET reveal pagina. */
+app.use('/pres/:name', function(req, res) {
+    if (secret === '') {
+        secret = req.params.name;
+    }
+    res.sendfile(path.join(__dirname, './client/views/', 'reveal.html'));
+});
+
 // Define 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -64,17 +72,16 @@ if (app.get('env') === 'development') {
 var port = 3000;
 var io = require('socket.io').listen(app.listen(port));
 var presentation = io.on('connection', function (socket) {
-    socket.on('load', function (data) {
-        socket.emit('access', {
-            access: (data.key === secret ? "granted" : "denied")
-        });
+    socket.emit('access');
+    socket.on('gettitel', function(data) {
+        console.log('secret: ' + secret);
+        secret = '';
+        console.log('empty: ' + secret)
     });
     socket.on('slide-changed', function (data) {
-        if (data.key === secret) {
-            presentation.emit('navigate', {
-                hash: data.hash
-            });
-        }
+        presentation.emit('navigate', {
+            hash: data.hash
+        });
     });
 });
 

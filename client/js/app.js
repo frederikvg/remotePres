@@ -1,5 +1,6 @@
 'use strict';
 
+var revealPres = angular.module('revealPres', ['revealCtrl', 'revealService']);
 var remotePres = angular.module('remotePres', ['rootCtrl', 'loginCtrl', 'remoteCtrl', 'slideCtrl', 'remoteService', 'messagesService', 'ngRoute']);
 
 remotePres.config( 
@@ -15,10 +16,6 @@ remotePres.config(
             })
             .when('/login', {
                 templateUrl: '/views/enter.html',
-                access: {restricted: false}
-            })
-            .when('/reveal', {
-                templateUrl: '/views/reveal.html',
                 access: {restricted: false}
             })
             .when('/user', {
