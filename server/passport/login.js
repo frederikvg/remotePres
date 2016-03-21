@@ -13,12 +13,11 @@ module.exports = function (passport) {
                         return done(null, false, req.flash('message', 'User Not found.'));
                     }
                     if (!isValidPassword(user, password)) {
-                        return done(null, false, req.flash('message', 'Invalid Password')); // redirect back to login page
+                        return done(null, false, req.flash('message', 'Invalid Password'));
                     }
                     return done(null, user);
                 }
             );
-
         }
     ));
 

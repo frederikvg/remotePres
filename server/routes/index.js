@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var Slide = require('../models/slide');
+var User = require('../models/user');
 
 var isAuthenticated = function (req, res, next) {
 	if (req.isAuthenticated()) {
@@ -22,14 +22,14 @@ module.exports = function (passport) {
         res.sendfile(path.join(__dirname, '../../client/views/', 'reveal.html'));
     });
 
-	/* Login POST verwerken*/
+	/* POST login verwerken*/
 	router.post('/login', passport.authenticate('login', {
 		successRedirect: '/#/home',
 		failureRedirect: '/#/login',
 		failureFlash : true
 	}));
 
-	/* Handle Registration POST */
+	/* POST registratie verwerken */
 	router.post('/signup', passport.authenticate('signup', {
 		successRedirect: '/#/home',
 		failureRedirect: '/login',
@@ -42,6 +42,7 @@ module.exports = function (passport) {
 		res.redirect('/');
 	});
     
+    /* GET user gegevens */
     router.get('/status', function (req, res) {
         if (!req.isAuthenticated()) {
             return res.status(200).json({
@@ -55,35 +56,45 @@ module.exports = function (passport) {
         }
     });
     
+    /* Vind presentaties op naam */
     router.get('/pres/:titel', function (req, res) {
-        Slide.findOne({ "presentatie": req.params.titel }, function (err, pres) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.status(200).json(pres);
+        User.findOne(
+            { "presentaties.presentatie": req.params.titel },
+            { "presentaties.$": 1 },
+            function (err, pres) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.status(200).json(pres.presentaties[0]);
+                }
             }
-        });
+        );
     });
     
-    router.post('/addpres', function (req, res) {
-        var newPres = new Slide({
-            presentatie: req.body.presTitle
-        });
-        
-        newPres.save(function (err) {
-            if (err) {
-                res.send(err);
-            } else {
-                res.status(200).end();
-            }
-        });
-    });
-    
+    /* POST presentatie titel, zoek op userID */
     router.post('/addpres/:id', function (req, res) {
-        Slide.update(
-            { presentatie: req.params.id },
+        User.update(
+            { _id: req.params.id },
             { $push:
-                { slides: { slidetitle: req.body.slideTitle, slidecontent: req.body.slideContent }}
+                { presentaties: { presentatie: req.body.presTitle }}
+            },
+            { upsert: true },
+            function (err, pres) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.status(200).json(pres);
+                }
+            }
+        );
+    });
+    
+    /* POST slides, zoek op userID en naam presentatie */
+    router.post('/addslide/:id/:name', function (req, res) {
+        User.update(
+            { _id: req.params.id, 'presentaties.presentatie': req.params.name },
+            { $push:
+                { 'presentaties.$.slides': { slidetitle: req.body.slideTitle, slidecontent: req.body.slideContent }}
             },
             { upsert: true },
             function (err, slides) {
@@ -96,12 +107,13 @@ module.exports = function (passport) {
         );
     });
     
-    router.get('/slides', function (req, res) {
-        Slide.find(function (err, slides) {
+    /* Haal gegevens van presentaties per gebruiker op */
+    router.get('/findpres/:id', function (req, res) {
+        User.findOne({ '_id': req.params.id }, function (err, pres) {
             if (err) {
                 res.send(err);
             } else {
-                res.status(200).json(slides);
+                res.status(200).json(pres);
             }
         });
     });

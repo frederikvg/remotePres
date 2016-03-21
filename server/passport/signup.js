@@ -13,7 +13,7 @@ module.exports = function (passport) {
                         return done(err);
                     }
                     if (user) {
-                        return done(null, false, req.flash('message', 'User Already Exists'));
+                        return done(null, false, req.flash('message', 'Gebruiker bestaat al'));
                     } else {
                         var newUser = new User();
                         newUser.username = username;

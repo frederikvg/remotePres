@@ -13,7 +13,7 @@
             <input type="password" name="password" class="form-control input-form" ng-model="user.password" />
         </div>
         <div class="center-text">
-            <input type="submit" value="Log in" id="da-login-submit" class="btn btn-green btn-form" />
+            <input type="submit" value="Log in" class="btn btn-green btn-form" />
         </div>
     </form>
     <form action="/signup" method='post' class="login-form" ng-show="!isLogin">
@@ -30,7 +30,7 @@
             <input type="password" class="form-control input-form" ng-model="newUser.password" name="password" />
         </div>  
         <div class="form-group">
-            <span>Herhaal wachtwoord: </span>
+            <span>Bevestig wachtwoord: </span>
             <input type="password" class="form-control input-form" ng-model="newUser.repeatPassword" />
         </div>  
             <div class="error" ng-show='checkMatch()'>Wachtwoord komt niet overeen!</div>

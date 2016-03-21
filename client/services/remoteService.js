@@ -37,17 +37,14 @@ remoteService.factory('AuthService', ['$q', '$timeout', '$http', function ($q, $
 remoteService.factory('addPres', ['$http', function ($http) {
 
     return {
-        find: function (titel) {
-            return $http.get('/pres/' + titel);
+        getpres: function (userId) {
+            return $http.get('/findpres/' + userId);
         },
-        get: function () {
-            return $http.get('/slides');
+        createPres: function (userId, newPres) {
+            return $http.post('/addpres/' + userId, newPres);
         },
-        createPres: function (newPres) {
-            return $http.post('/addpres', newPres);
-        },
-        createSlide: function (presId, newSlide) {
-            return $http.post('/addpres/' + presId, newSlide);
+        createSlide: function (userId, presName, newSlide) {
+            return $http.post('/addslide/' + userId + '/' + presName, newSlide);
         },
         delete: function (id) {
             return $http.delete('/addslide/' + id);
