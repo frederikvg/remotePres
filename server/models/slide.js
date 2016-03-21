@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 
-var slideSchema = new mongoose.Schema ({
-    slidetitle: { type: String,  default: '' },
-    slidecontent: { type: String,  default: '' }
+var slideSchema = new mongoose.Schema({
+    slidetitle: { type: String, default: '' },
+    slidecontent: { type: String, default: '' }
 }, {_id: false});
 
-var presSchema =  new mongoose.Schema ({
+var presSchema =  new mongoose.Schema({
     presentatie: String,
     slides: [slideSchema]
 });

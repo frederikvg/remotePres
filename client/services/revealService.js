@@ -3,10 +3,12 @@
 var revealService = angular.module('revealService', []);
 
 revealService.factory('socket', ['$rootScope', function ($rootScope) {
+    
     var socket = io.connect();
+    
     return {
         on: function (eventName, callback) {
-            socket.on(eventName, function () {  
+            socket.on(eventName, function () {
                 var args = arguments;
                 $rootScope.$apply(function () {
                     callback.apply(socket, args);
@@ -21,7 +23,15 @@ revealService.factory('socket', ['$rootScope', function ($rootScope) {
                         callback.apply(socket, args);
                     }
                 });
-            })
+            });
+        }
+    };
+}]);
+
+revealService.factory('getPres', ['$http', function ($http) {
+    return {
+        get: function (titel) {
+            return $http.get('/pres/' + titel);
         }
     };
 }]);

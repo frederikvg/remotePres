@@ -77,6 +77,9 @@ h1 > span {
     font-weight: 200;
 }
 
+dd {
+    padding-left: 30px;
+}
 .container {
     height: 80%;
 }
@@ -106,24 +109,25 @@ h1 > span {
 }
 
 .navbar-form {
-    margin-right: -57px !important;
+    margin-right: -106px !important;
 }
 .navbar-form .form-control {
     width: 100% !important;
 }
 
 .navbar-form .form-group {
-    width: 60% !important;
+    width: 44% !important;
 }
 
-.projectLogo {
+.project-logo {
     height: 36px;
     margin: 0 10px 0 0;
     display: inline-block !important;
 }
 
-.projectTitle {
+.project-title {
     display: inline-block !important;
+    margin-top: 1px;
 }
 
 .navbar-default .navbar-brand {
@@ -220,6 +224,8 @@ div.reveal {
     border-radius: 6px;
     font-size: 1.2em;
     text-shadow: 1px 1px 0px rgba(0,0,0,.1);
+    height: 34px !important;
+    border-radius: 6px !important;
 }
 
 .btn-default {
@@ -245,7 +251,7 @@ div.reveal {
 
 .btn-form {
     width: 50% !important;
-    margin-top: 10px !important;
+    margin: 10px 0 !important;
 }
 
 .error {

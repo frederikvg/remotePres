@@ -2,17 +2,21 @@
 
 var revealCtrl = angular.module('revealCtrl', []);
 
-revealCtrl.controller('revealCtrl', ['$scope', '$timeout', '$interval', 'socket', function ($scope, $timeout, $interval, socket) {
+revealCtrl.controller('revealCtrl', ['$scope', '$timeout', '$interval', '$http', 'socket', function ($scope, $timeout, $interval, $http, socket) {
 
-    $scope.slides = [
-        { image: "../img/1.jpg", video: "", title: "Title Text", content: "Lorem Ipsum is slechts een proeftekst PageMaker die versies van Lorem Ipsum bevatten.",  background:"../img/3.jpg"},
-        { image: "../img/5.jpg", video: "", title: "...no color here? Why??", content: "", background: "../img/2.jpg"}
-    ];
+    var presTitle = localStorage.getItem('presCode'),
+        request = $http.get('/pres/' + presTitle);
     
-    $timeout(function(){
+    request.then(function (response) {
+        if (response) {
+            $scope.data = response.data;
+        }
+    });
+    
+    $timeout(function () {
         Reveal.initialize({
             history: true
-        });      
+        });
     }, 1000);
     
     socket.on('access', function (data) {
@@ -23,10 +27,9 @@ revealCtrl.controller('revealCtrl', ['$scope', '$timeout', '$interval', 'socket'
             if (ignore) {
                 return;
             }
-
+            
             var hash = window.location.hash;
 
-        socket.emit('gettitel');
             socket.emit('slide-changed', {
                 hash: hash
             });

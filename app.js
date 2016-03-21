@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var secret = '';
 
 var mongoose = require('mongoose/');
 // Connect to DB
@@ -16,6 +15,7 @@ var app = express();
 app.set('views', path.join(__dirname, '/client/views'));
 app.set('view engine', 'jade');
 
+app.set('port', process.env.PORT || 3000);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,16 +42,8 @@ initPassport(passport);
 var routes = require('./server/routes/index')(passport);
 app.use('/', routes);
 
-/* GET reveal pagina. */
-app.use('/pres/:name', function(req, res) {
-    if (secret === '') {
-        secret = req.params.name;
-    }
-    res.sendfile(path.join(__dirname, './client/views/', 'reveal.html'));
-});
-
 // Define 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -59,7 +51,7 @@ app.use(function(req, res, next) {
 
 // Development error handler
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -69,15 +61,12 @@ if (app.get('env') === 'development') {
 }
 
 // Configuring socket.io
-var port = 3000;
-var io = require('socket.io').listen(app.listen(port));
+var io = require('socket.io').listen(app.listen(app.get('port'), function () {
+    console.log("Server draait nu op poort: " + app.get('port'));
+}));
+
 var presentation = io.on('connection', function (socket) {
     socket.emit('access');
-    socket.on('gettitel', function(data) {
-        console.log('secret: ' + secret);
-        secret = '';
-        console.log('empty: ' + secret)
-    });
     socket.on('slide-changed', function (data) {
         presentation.emit('navigate', {
             hash: data.hash
@@ -85,5 +74,4 @@ var presentation = io.on('connection', function (socket) {
     });
 });
 
-console.log('remotePres draait nu op localhost:' + port);
 module.export = app;

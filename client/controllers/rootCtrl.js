@@ -2,34 +2,37 @@
 
 var rootCtrl = angular.module('rootCtrl', []);
 
-rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$timeout', 'socket', function ($scope, $http, $location, $interval, $timeout, socket) {
+rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$timeout', function ($scope, $http, $location, $interval, $timeout) {
     
     $scope.user = {};
-    var key;
     var request = $http.get('/status');
     
-    request.then(function(response) {
-        console.log(response);
-        if(response.data.status === true) {
+    request.then(function (response) {
+        if (response.data.status === true) {
             $scope.isLoggedIn = true;
             $scope.user = response.data.user;
-        }
-        else {
+        } else {
             $scope.isLoggedIn = false;
             $scope.user.lastName = "onbekende";
         }
     });
 
-    $scope.login = function(username, password) {
+    $scope.login = function (username, password) {
         window.location.href = '/#/login';
-    };    
+    };
 
     $scope.logout = function () {
         window.location.href = '/signout';
     };
     
-    $scope.isActive = function (viewLocation) { 
+    $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
     };
-
+    
+    $scope.presCode = function () {
+        if ($scope.code) {
+            localStorage.setItem('presCode', $scope.code);
+            window.location.href = '/reveal';
+        }
+    };
 }]);

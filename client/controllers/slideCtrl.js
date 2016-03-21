@@ -4,13 +4,9 @@ var slideCtrl = angular.module('slideCtrl', []);
 
 slideCtrl.controller('slideCtrl', ['$scope', 'addPres', '$http', function ($scope, addPres, $http) {
 
-    $scope.slide = {};
-    $scope.presentaties = {};
-    
     var load = function () {
         addPres.get().success(function (data) {
             $scope.presentaties = data;
-            console.log($scope.presentaties);
         });
     };
 
@@ -20,20 +16,15 @@ slideCtrl.controller('slideCtrl', ['$scope', 'addPres', '$http', function ($scop
         addPres.createPres($scope.pres)
             .success(function () {
                 load();
-                console.log('pres toegevoegd')
             });
-    }
+    };
     
     $scope.saveSlide = function () {
-        if ($scope.slide.slideTitle != null && $scope.slide.slideContent != null) {
-            console.log($scope.slide);
-            addPres.createSlide($scope.slide.presTitle, $scope.slide)
+        if ($scope.pres.slideTitle !== null && $scope.pres.slideContent !== null) {
+            addPres.createSlide($scope.pres.presTitle, $scope.pres)
                 .success(function () {
-                    console.log('success');
+                    load();
                 });
-        } else {
-            console.log('error saving slide');
         }
-        load();
     };
 }]);
