@@ -1,36 +1,39 @@
-<div ng-controller="slideCtrl">
+<div ng-controller='slideCtrl'>
     <h2>Presentaties</h2>
     <h4>
-        <form class="login-form">
-            <div class="center-text">
-                <img class="login-logo" src="../img/logo.png">
+        <form class='login-form'>
+            <div class='center-text'>
+                <img class='login-logo' src='../img/logo.png'>
             </div>
             <h1><span>Maak een </span>Presentatie</h1>
-            <div class="form-group">
+            <div class='form-group'>
                 <span>Presentatie code / titel: </span>
-                <input type="text" name="username" class="form-control input-form" ng-model="pres.presTitle" />
+                <input type='text' name='username' class='form-control input-form' ng-model='pres.presTitle' />
             </div>
-            <div class="center-text">
-                <input type="submit" value="Sla titel op" ng-click="savePres()" class="btn btn-green btn-form" />
+            <div class='center-text'>
+                <input type='submit' value='Sla titel op' ng-click='savePres()' class='btn btn-green btn-form' ng-disabled='!canSubmit()' />
             </div>
-            <div class="form-group">
+            <!-- <div class='form-group'>
                 <span>Slide titel</span>
-                <input type="text" class="form-control input-form" placeholder="slide titel..." ng-model="pres.slideTitle" />
+                <input type='text' class='form-control input-form' placeholder='slide titel...' ng-model='pres.slideTitle' />
             </div>
-            <div class="form-group">
+            <div class='form-group'>
                 <span>Slide content</span>
-                <input type="text" class="form-control input-form" placeholder="slide content" ng-model="pres.slideContent" />
+                <input type='text' class='form-control input-form' placeholder='slide content' ng-model='pres.slideContent' />
             </div>
-            <div class="center-text">
-                <input type="submit" value="Save slide" ng-click="saveSlide()" class="btn btn-green btn-form" />
-            </div>
+            <div class='center-text'>
+                <input type='submit' value='Save slide' ng-click='saveSlide()' class='btn btn-green btn-form' />
+            </div> -->
         </form>
-        <div ng-repeat="presentatie in presentaties" style="border:1px solid white">
-            <h1>{{presentatie.presentatie}}</h1>
-            <h4 ng-repeat="slide in presentatie.slides">
-                {{ slide.slidetitle }} <br />
-                {{ slide.slidecontent }}
+    </h4>
+    <div ng-repeat='presentatie in presentaties' class='col-md-6'>
+        <div class='pres-group'>
+            <h2>
+                {{ presentatie.presentatie }}
+            </h2>
+            <h4>
+                Aangemaakt: {{ presentatie.created }}
             </h4>
         </div>
-    </h4>
+    </div>
 </div>

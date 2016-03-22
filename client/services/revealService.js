@@ -27,11 +27,3 @@ revealService.factory('socket', ['$rootScope', function ($rootScope) {
         }
     };
 }]);
-
-revealService.factory('getPres', ['$http', function ($http) {
-    return {
-        get: function (titel) {
-            return $http.get('/pres/' + titel);
-        }
-    };
-}]);

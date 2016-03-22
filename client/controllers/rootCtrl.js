@@ -2,7 +2,8 @@
 
 var rootCtrl = angular.module('rootCtrl', []);
 
-rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$timeout', function ($scope, $http, $location, $interval, $timeout) {
+rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$timeout',
+    function ($scope, $http, $location, $interval, $timeout) {
     
     $scope.user = {};
     var request = $http.get('/status');
@@ -13,7 +14,7 @@ rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$
             $scope.user = response.data.user;
         } else {
             $scope.isLoggedIn = false;
-            $scope.user.lastName = "onbekende";
+            $scope.user.lastName = 'onbekende';
         }
     });
 
@@ -31,8 +32,18 @@ rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$
     
     $scope.presCode = function () {
         if ($scope.code) {
-            localStorage.setItem('presCode', $scope.code);
-            window.location.href = '/reveal';
+
+            var pres = $http.get('/pres/' + $scope.code);
+            
+            pres.then(function (response) {
+                if (response) {
+                    localStorage.setItem('presCode', $scope.code);
+                    window.location.href = '/reveal';
+                } else {
+                    console.log('titel niet gevonden!');
+                }
+            });
+
         }
     };
 }]);

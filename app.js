@@ -62,7 +62,7 @@ if (app.get('env') === 'development') {
 
 // Configuring socket.io
 var io = require('socket.io').listen(app.listen(app.get('port'), function () {
-    console.log("Server draait nu op poort: " + app.get('port'));
+    console.log('Server draait nu op poort: ' + app.get('port'));
 }));
 
 var presentation = io.on('connection', function (socket) {

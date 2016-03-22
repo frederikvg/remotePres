@@ -59,12 +59,13 @@ module.exports = function (passport) {
     /* Vind presentaties op naam */
     router.get('/pres/:titel', function (req, res) {
         User.findOne(
-            { "presentaties.presentatie": req.params.titel },
-            { "presentaties.$": 1 },
+            { 'presentaties.presentatie': req.params.titel },
+            { 'presentaties.$': 1 },
             function (err, pres) {
+                console.log(pres);
                 if (err) {
                     res.send(err);
-                } else {
+                } else if (pres) {
                     res.status(200).json(pres.presentaties[0]);
                 }
             }

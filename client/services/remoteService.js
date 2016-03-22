@@ -2,7 +2,7 @@
 
 var remoteService = angular.module('remoteService', []);
 
-remoteService.factory('AuthService', ['$q', '$timeout', '$http', function ($q, $timeout, $http) {
+remoteService.factory('AuthService', ['$http', function ($http) {
 
     var user = null;
 

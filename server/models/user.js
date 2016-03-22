@@ -7,6 +7,7 @@ var slideSchema = new mongoose.Schema({
 
 var presSchema =  new mongoose.Schema({
     presentatie: String,
+    created: { type: Date, default: Date.now },
     slides: [slideSchema]
 }, {_id: false});
 
