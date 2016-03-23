@@ -2,8 +2,8 @@
 
 var rootCtrl = angular.module('rootCtrl', []);
 
-rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$timeout',
-    function ($scope, $http, $location, $interval, $timeout) {
+rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$timeout', 'routes',
+    function ($scope, $http, $location, $interval, $timeout, routes) {
     
     $scope.user = {};
     var request = $http.get('/status');
@@ -32,7 +32,7 @@ rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$
     
     $scope.presCode = function () {
         if ($scope.code) {
-
+            
             var pres = $http.get('/pres/' + $scope.code);
             
             pres.then(function (response) {
@@ -45,5 +45,31 @@ rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$
             });
 
         }
+    };
+        
+    $scope.deleteUser = function () {
+        routes.delete($scope.user._id)
+            .success(function (user) {
+                window.location.href = '/signout';
+            });
+    };
+        
+    $scope.submitEdit = function () {
+        routes.editprofile($scope.user._id, $scope.user)
+            .success(function (user) {
+            });
+        window.location.href = '/#/user';
+    };
+
+    $scope.canSubmit = function () {
+        if (!$scope.checkMatch() && $scope.user.username !== undefined && $scope.user.password2 !== undefined && $scope.user.username !== '' && $scope.user.password2 !== '') {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    $scope.checkMatch = function () {
+        return $scope.user.password2 !== $scope.user.repeatPassword;
     };
 }]);

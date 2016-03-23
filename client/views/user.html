@@ -1,9 +1,50 @@
-<h2>Profiel<h2>
-<h4>
-    <ul>
-        <li>Gebruikersnaam: {{user.username}}</li>
-        <li>Email: {{user.email}}</li>
-        <li>Voornaam: {{user.firstName}}</li>
-        <li>Achternaam: {{user.lastName}}</li>
-    </ul>
-</h4>
+<div class='center-content'>
+    <div class='pres-group col-xs-8'>
+        <div class='center-text'>
+            <img class='login-logo' src='../img/logo.png'>
+        </div>
+        <h1>Profiel</h1>
+        <div ng-show='!profEdit'>
+            <h4>
+                Gebruikersnaam: <span>{{ user.username }}</span><br />
+                Email: <span>{{ user.email }}</span><br />
+                Voornaam: <span>{{ user.firstName }}</span><br />
+                Achternaam: <span>{{ user.lastName }}</span>
+            </h4> 
+            <div class='center-text row'>
+                <input type='button' value='Bewerk' class='btn btn-green btn-form col-xs-3' ng-click='profEdit=!profEdit' />
+                <input type='button' value='Verwijder' class='btn btn-red btn-form col-xs-3' ng-click='deleteUser()' />
+            </div>
+        </div>
+        <form ng-show='profEdit'>
+            <div class='form-group row'>                                 
+                <div class='col-xs-6'>Gebruikersnaam:</div>
+                <div class='col-xs-6'><input type='text' class='form-control input-form' ng-model='user.username' name='username' /></div>
+            </div>
+            <div class='form-group row'>
+                <div class='col-xs-6'>Wachtwoord:</div>
+                <div class='col-xs-6'><input type='password' class='form-control input-form' ng-model='user.password2' name='password' /></div>
+            </div>  
+            <div class='form-group row'>
+                <div class='col-xs-6'>Bevestig wachtwoord:</div>
+                <div class='col-xs-6'><input type='password' class='form-control input-form' ng-model='user.repeatPassword' /></div>
+            </div>  
+                <div class='error' ng-show='checkMatch()'>Wachtwoord komt niet overeen!</div>
+            <div class='form-group row'>
+                <div class='col-xs-6'>Email:</div>
+                <div class='col-xs-6'><input type='email' class='form-control input-form' ng-model='user.email' name='email' /></div>
+            </div>   
+            <div class='form-group row'>
+                <div class='col-xs-6'>Voornaam:</div>
+                <div class='col-xs-6'><input type='text' class='form-control input-form' ng-model='user.firstName' name='firstName' /></div>
+            </div>   
+            <div class='form-group row'>
+                <div class='col-xs-6'>Achternaam:</div>
+                <div class='col-xs-6'><input type='text' class='form-control input-form' ng-model='user.lastName' name='lastName' /></div>
+            </div>
+            <div class='center-text row'>
+                <input type='submit' value='Wijzig' class='btn btn-green btn-form col-xs-3' ng-disabled='!canSubmit()' ng-click='submitEdit()' />
+            </div>
+        </form> 
+    </div>
+</div>

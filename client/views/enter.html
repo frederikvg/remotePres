@@ -1,53 +1,53 @@
 <div ng-controller='loginCtrl' class='center-content'>
-    <form action='/login' method='post' class='login-form' ng-show='isLogin'>
+    <form action='/login' method='post' class='login-form col-xs-8' ng-show='isLogin'>
         <div class='center-text'>
             <img class='login-logo' src='../img/logo.png'>
         </div>
         <h1><span>Log in op je remote</span>Pres</h1>
-        <div class='form-group'>
-            <span>Gebruikersnaam: </span>
-            <input type='text' name='username' class='form-control input-form' ng-model='user.username' />
+        <div class='form-group row'>
+            <div class='col-xs-6'>Gebruikersnaam:</div>
+            <div class='col-xs-6'><input type='text' name='username' class='form-control input-form' ng-model='user.username' /></div>
         </div>
-        <div class='form-group'>
-            <span>Wachtwoord: </span>
-            <input type='password' name='password' class='form-control input-form' ng-model='user.password' />
+        <div class='form-group row'>
+            <div class='col-xs-6'>Wachtwoord:</div>
+            <div class='col-xs-6'><input type='password' name='password' class='form-control input-form' ng-model='user.password' /></div>
         </div>
-        <div class='center-text'>
-            <input type='submit' value='Log in' class='btn btn-green btn-form' />
+        <div class='center-text row'>
+            <input type='submit' value='Log in' class='btn btn-green btn-form col-xs-3' />
         </div>
     </form>
-    <form action='/signup' method='post' class='login-form' ng-show='!isLogin'>
+    <form action='/signup' method='post' class='login-form col-xs-8' ng-show='!isLogin'>
         <div class='center-text'>
             <img class='login-logo' src='../img/logo.png'>
         </div>
         <h1><span>Maak een </span>Profiel <span>aan</span></h1>
-        <div class='form-group'>                                 
-            <span>Gebruikersnaam: </span>
-            <input type='text' class='form-control input-form' ng-model='newUser.username' name='username' />
+        <div class='form-group row'>                                 
+            <div class='col-xs-6'>Gebruikersnaam:</div>
+            <div class='col-xs-6'><input type='text' class='form-control input-form' ng-model='newUser.username' name='username' /></div>
         </div>
-        <div class='form-group'>
-            <span>Wachtwoord: </span>
-            <input type='password' class='form-control input-form' ng-model='newUser.password' name='password' />
+        <div class='form-group row'>
+            <div class='col-xs-6'>Wachtwoord:</div>
+            <div class='col-xs-6'><input type='password' class='form-control input-form' ng-model='newUser.password' name='password' /></div>
         </div>  
-        <div class='form-group'>
-            <span>Bevestig wachtwoord: </span>
-            <input type='password' class='form-control input-form' ng-model='newUser.repeatPassword' />
+        <div class='form-group row'>
+            <div class='col-xs-6'>Bevestig wachtwoord:</div>
+            <div class='col-xs-6'><input type='password' class='form-control input-form' ng-model='newUser.repeatPassword' /></div>
         </div>  
             <div class='error' ng-show='checkMatch()'>Wachtwoord komt niet overeen!</div>
-        <div class='form-group'>
-            <span>Email: </span>
-            <input type='email' class='form-control input-form' name='email' />
+        <div class='form-group row'>
+            <div class='col-xs-6'>Email:</div>
+            <div class='col-xs-6'><input type='email' class='form-control input-form' name='email' /></div>
         </div>   
-        <div class='form-group'>
-            <span>Voornaam: </span>
-            <input type='text' class='form-control input-form' name='firstName' />
+        <div class='form-group row'>
+            <div class='col-xs-6'>Voornaam:</div>
+            <div class='col-xs-6'><input type='text' class='form-control input-form' name='firstName' /></div>
         </div>   
-        <div class='form-group'>
-            <span>Achternaam: </span>
-            <input type='text' class='form-control input-form' name='lastName' />
+        <div class='form-group row'>
+            <div class='col-xs-6'>Achternaam:</div>
+            <div class='col-xs-6'><input type='text' class='form-control input-form' name='lastName' /></div>
         </div>
-        <div class='center-text'>
-            <input type='submit' value='Maak aan' class='btn btn-green btn-form' ng-disabled='!canSubmit()'>
+        <div class='center-text row'>
+            <input type='submit' value='Maak aan' class='btn btn-green btn-form col-xs-3' ng-disabled='!canSubmit()' />
         </div>
     </form>    
     <a href ng-click='toggleLogin()'>{{ buttonText }}</a>

@@ -6,6 +6,7 @@ revealCtrl.controller('revealCtrl', ['$scope', '$timeout', '$interval', '$http',
 
     var presTitle = localStorage.getItem('presCode'),
         request = $http.get('/pres/' + presTitle);
+        console.log(presTitle);
     
     request.then(function (response) {
         if (response) {

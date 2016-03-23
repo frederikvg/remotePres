@@ -2,7 +2,7 @@
 
 var slideCtrl = angular.module('slideCtrl', []);
 
-slideCtrl.controller('slideCtrl', ['$scope', 'addPres', '$http', function ($scope, addPres, $http) {
+slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope, routes, $http) {
 
     $scope.pres = {};
     var request = $http.get('/status'),
@@ -12,11 +12,12 @@ slideCtrl.controller('slideCtrl', ['$scope', 'addPres', '$http', function ($scop
     request.then(function (response) {
         if (response.data.status === true) {
             $scope.user = response.data.user;
+            $scope.pres.maker = response.data.user.firstName + ' ' + response.data.user.lastName;
         }
     });
 
     var load = function () {
-        addPres.getpres($scope.user._id).success(function (data) {
+        routes.getpres($scope.user._id).success(function (data) {
             $scope.presentaties = data.presentaties;
             for (var i = 0; i < $scope.presentaties.length; i++) {
                 var time = new Date($scope.presentaties[i].created);
@@ -25,15 +26,19 @@ slideCtrl.controller('slideCtrl', ['$scope', 'addPres', '$http', function ($scop
                     months[time.getMonth()] + ' ' +
                     time.getFullYear() + ', ' +
                     time.getHours() + ':' +
-                    time.getMinutes();
+                    pad(time.getMinutes());
             }
         });
     };
 
     load();
+    
+    function pad(n) {
+        return (n < 10) ? ("0" + n) : n;
+    };
 
     $scope.savePres = function () {
-        addPres.createPres($scope.user._id, $scope.pres)
+        routes.createPres($scope.user._id, $scope.pres)
             .success(function () {
                 load();
             });
@@ -41,7 +46,7 @@ slideCtrl.controller('slideCtrl', ['$scope', 'addPres', '$http', function ($scop
 
     $scope.saveSlide = function () {
         if ($scope.pres.slideTitle !== null && $scope.pres.slideContent !== null) {
-            addPres.createSlide($scope.user._id, $scope.pres.presTitle, $scope.pres)
+            routes.createSlide($scope.user._id, $scope.pres.presTitle, $scope.pres)
                 .success(function () {
                     load();
                 });

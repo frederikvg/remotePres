@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var bCrypt = require('bcrypt-nodejs');
 var User = require('../models/user');
 
 var isAuthenticated = function (req, res, next) {
@@ -35,6 +36,26 @@ module.exports = function (passport) {
 		failureRedirect: '/login',
 		failureFlash : true
 	}));
+
+	/* POST profiel updaten */
+	router.post('/editprofile/:id', function (req, res) {
+        User.findOneAndUpdate({"_id": req.params.id}, {
+                username: req.body.username,
+                password: createHash(req.body.password2),
+                email: req.body.email,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName
+            }, {new: true}, 
+            function(err, person) {
+                if (err) {
+                    console.log('got an error');
+                } 
+            }
+        );
+    });
+    var createHash = function (password) {
+        return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+    };
 
 	/* Logout verwerken */
 	router.get('/signout', function (req, res) {
@@ -77,7 +98,7 @@ module.exports = function (passport) {
         User.update(
             { _id: req.params.id },
             { $push:
-                { presentaties: { presentatie: req.body.presTitle }}
+                { presentaties: { presentatie: req.body.presTitle, maker: req.body.maker }}
             },
             { upsert: true },
             function (err, pres) {
@@ -116,6 +137,14 @@ module.exports = function (passport) {
             } else {
                 res.status(200).json(pres);
             }
+        });
+    });
+    
+    router.delete('/delete/:id', function (req, res) {
+        User.remove({ _id: req.params.id }, function (err, user) {
+            if (err)
+                res.send(err);
+            res.status(200).end();
         });
     });
     

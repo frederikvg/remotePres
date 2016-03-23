@@ -34,7 +34,7 @@ remoteService.factory('AuthService', ['$http', function ($http) {
     };
 }]);
 
-remoteService.factory('addPres', ['$http', function ($http) {
+remoteService.factory('routes', ['$http', function ($http) {
 
     return {
         getpres: function (userId) {
@@ -46,8 +46,12 @@ remoteService.factory('addPres', ['$http', function ($http) {
         createSlide: function (userId, presName, newSlide) {
             return $http.post('/addslide/' + userId + '/' + presName, newSlide);
         },
+        editprofile: function (userId, userEdit) {
+            console.log(userEdit);
+            return $http.post('/editprofile/' + userId, userEdit);    
+        },
         delete: function (id) {
-            return $http.delete('/addslide/' + id);
+            return $http.delete('/delete/' + id);
         }
     };
     
