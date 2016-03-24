@@ -40,6 +40,9 @@ remoteService.factory('routes', ['$http', function ($http) {
         getpres: function (userId) {
             return $http.get('/findpres/' + userId);
         },
+        getslides: function (presTitle) {
+            return $http.get('/pres/' + presTitle);
+        },
         createPres: function (userId, newPres) {
             return $http.post('/addpres/' + userId, newPres);
         },
@@ -47,7 +50,6 @@ remoteService.factory('routes', ['$http', function ($http) {
             return $http.post('/addslide/' + userId + '/' + presName, newSlide);
         },
         editprofile: function (userId, userEdit) {
-            console.log(userEdit);
             return $http.post('/editprofile/' + userId, userEdit);    
         },
         delete: function (id) {

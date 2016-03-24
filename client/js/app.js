@@ -1,7 +1,7 @@
 'use strict';
 
 var revealPres = angular.module('revealPres', ['revealCtrl', 'revealService']);
-var remotePres = angular.module('remotePres', ['rootCtrl', 'loginCtrl', 'slideCtrl', 'remoteService', 'ngRoute']);
+var remotePres = angular.module('remotePres', ['rootCtrl', 'loginCtrl', 'slideCtrl', 'remoteService', 'ngRoute', 'ngDialog']);
 
 remotePres.config(['$routeProvider', function ($routeProvider) {
     $routeProvider

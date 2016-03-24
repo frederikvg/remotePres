@@ -2,8 +2,8 @@
 
 var rootCtrl = angular.module('rootCtrl', []);
 
-rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$timeout', 'routes',
-    function ($scope, $http, $location, $interval, $timeout, routes) {
+rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$timeout', 'routes', 'ngDialog',
+    function ($scope, $http, $location, $interval, $timeout, routes, ngDialog) {
     
     $scope.user = {};
     var request = $http.get('/status');
@@ -32,26 +32,16 @@ rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$
     
     $scope.presCode = function () {
         if ($scope.code) {
-            
+            $scope.code = $scope.code.replace(/ /g, '').toLowerCase();
             var pres = $http.get('/pres/' + $scope.code);
             
             pres.then(function (response) {
                 if (response) {
                     localStorage.setItem('presCode', $scope.code);
                     window.location.href = '/reveal';
-                } else {
-                    console.log('titel niet gevonden!');
                 }
             });
-
         }
-    };
-        
-    $scope.deleteUser = function () {
-        routes.delete($scope.user._id)
-            .success(function (user) {
-                window.location.href = '/signout';
-            });
     };
         
     $scope.submitEdit = function () {
@@ -71,5 +61,16 @@ rootCtrl.controller('rootCtrl', ['$scope', '$http', '$location', '$interval', '$
 
     $scope.checkMatch = function () {
         return $scope.user.password2 !== $scope.user.repeatPassword;
+    };
+
+    $scope.deletePopup = function () {
+        ngDialog.open({ template: 'views/delete.html', className: 'ngdialog-theme-default', controller: 'rootCtrl' });
+    };
+        
+    $scope.deleteUser = function () {
+        routes.delete($scope.user._id)
+            .success(function (user) {
+                window.location.href = '/signout';
+            });
     };
 }]);

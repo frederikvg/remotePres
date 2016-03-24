@@ -16,7 +16,7 @@ slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope
         }
     });
 
-    var load = function () {
+    var loadPres = function () {
         routes.getpres($scope.user._id).success(function (data) {
             $scope.presentaties = data.presentaties;
             for (var i = 0; i < $scope.presentaties.length; i++) {
@@ -30,27 +30,42 @@ slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope
             }
         });
     };
+    loadPres();
 
-    load();
+    var loadSlides = function (presTitle) {
+        routes.getslides(presTitle).success(function (data) {
+            $scope.slides = data;
+            console.log(data);
+            var time = new Date(data.created);
+                $scope.slides.created =
+                    time.getDate() + ' ' +
+                    months[time.getMonth()] + ' ' +
+                    time.getFullYear() + ', ' +
+                    time.getHours() + ':' +
+                    pad(time.getMinutes());
+                console.log($scope.slides);
+        });
+    };
     
     function pad(n) {
         return (n < 10) ? ("0" + n) : n;
     };
 
     $scope.savePres = function () {
+        $scope.pres.presTitle = $scope.pres.presTitle.replace(/ /g, '').toLowerCase();
         routes.createPres($scope.user._id, $scope.pres)
             .success(function () {
-                load();
+                loadPres();
             });
     };
 
     $scope.saveSlide = function () {
-        if ($scope.pres.slideTitle !== null && $scope.pres.slideContent !== null) {
-            routes.createSlide($scope.user._id, $scope.pres.presTitle, $scope.pres)
-                .success(function () {
-                    load();
-                });
-        }
+        $scope.pres.presTitle = $scope.slides.presentatie;
+        console.log($scope.pres);
+        routes.createSlide($scope.user._id, $scope.pres.presTitle, $scope.pres)
+            .success(function () {
+                loadSlides($scope.pres.presTitle);
+            });
     };
 
     $scope.canSubmit = function () {
@@ -60,4 +75,9 @@ slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope
             return false;
         }
     };
+
+    $scope.openPres = function (presTitle) {
+        $scope.addPres = true;
+        loadSlides(presTitle);
+    }
 }]);

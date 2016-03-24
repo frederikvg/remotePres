@@ -11,39 +11,40 @@
                 Voornaam: <span>{{ user.firstName }}</span><br />
                 Achternaam: <span>{{ user.lastName }}</span>
             </h4> 
-            <div class='center-text row'>
+            <div class='center-text'>
                 <input type='button' value='Bewerk' class='btn btn-green btn-form col-xs-3' ng-click='profEdit=!profEdit' />
-                <input type='button' value='Verwijder' class='btn btn-red btn-form col-xs-3' ng-click='deleteUser()' />
+                <input type='button' value='Verwijder' class='btn btn-red btn-form col-xs-3' ng-click='deletePopup()' />
             </div>
         </div>
         <form ng-show='profEdit'>
-            <div class='form-group row'>                                 
-                <div class='col-xs-6'>Gebruikersnaam:</div>
-                <div class='col-xs-6'><input type='text' class='form-control input-form' ng-model='user.username' name='username' /></div>
+            <div class='form-group'>                                 
+                <span>Gebruikersnaam:</span>
+                <input type='text' class='form-control input-form' ng-model='user.username' name='username' />
             </div>
-            <div class='form-group row'>
-                <div class='col-xs-6'>Wachtwoord:</div>
-                <div class='col-xs-6'><input type='password' class='form-control input-form' ng-model='user.password2' name='password' /></div>
+            <div class='form-group'>
+                <span>Wachtwoord:</span>
+                <input type='password' class='form-control input-form' ng-model='user.password2' name='password' />
             </div>  
-            <div class='form-group row'>
-                <div class='col-xs-6'>Bevestig wachtwoord:</div>
-                <div class='col-xs-6'><input type='password' class='form-control input-form' ng-model='user.repeatPassword' /></div>
+            <div class='form-group'>
+                <span>Bevestig wachtwoord:</span>
+                <input type='password' class='form-control input-form' ng-model='user.repeatPassword' />
             </div>  
                 <div class='error' ng-show='checkMatch()'>Wachtwoord komt niet overeen!</div>
-            <div class='form-group row'>
-                <div class='col-xs-6'>Email:</div>
-                <div class='col-xs-6'><input type='email' class='form-control input-form' ng-model='user.email' name='email' /></div>
+            <div class='form-group'>
+                <span>Email:</span>
+                <input type='email' class='form-control input-form' ng-model='user.email' name='email' />
             </div>   
-            <div class='form-group row'>
-                <div class='col-xs-6'>Voornaam:</div>
-                <div class='col-xs-6'><input type='text' class='form-control input-form' ng-model='user.firstName' name='firstName' /></div>
+            <div class='form-group'>
+                <span>Voornaam:</span>
+                <input type='text' class='form-control input-form' ng-model='user.firstName' name='firstName' />
             </div>   
-            <div class='form-group row'>
-                <div class='col-xs-6'>Achternaam:</div>
-                <div class='col-xs-6'><input type='text' class='form-control input-form' ng-model='user.lastName' name='lastName' /></div>
+            <div class='form-group'>
+                <span>Achternaam:</span>
+                <input type='text' class='form-control input-form' ng-model='user.lastName' name='lastName' />
             </div>
-            <div class='center-text row'>
+            <div class='center-text'>
                 <input type='submit' value='Wijzig' class='btn btn-green btn-form col-xs-3' ng-disabled='!canSubmit()' ng-click='submitEdit()' />
+                <input type='button' value='Annuleer' class='btn btn-red btn-form col-xs-3' ng-click='profEdit=!profEdit' />
             </div>
         </form> 
     </div>
