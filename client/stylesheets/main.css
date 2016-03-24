@@ -317,8 +317,24 @@ span {
     font-size: 2em !important;  
 }
 
+.slides {
+    border: solid #AED5B9 1px;
+    color: #6F6F6F;
+    background: rgba(255,255,255,.2);
+    border-radius: 6px;
+    margin-top: 40px;
+}
+
 .btn-form {
     margin: 10px 0 !important;
+}
+
+.btn-slide {
+    margin: 10px;
+}
+
+.slidecontent {
+    margin: 30px;
 }
 
 .error {

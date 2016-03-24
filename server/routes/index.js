@@ -116,7 +116,14 @@ module.exports = function (passport) {
         User.update(
             { _id: req.params.id, 'presentaties.presentatie': req.params.name },
             { $push:
-                { 'presentaties.$.slides': { slidetitle: req.body.slideTitle, slidecontent: req.body.slideContent }}
+                { 'presentaties.$.slides': { 
+                    slidetitle: req.body.slideTitle, 
+                    slidecontent: req.body.slideContent,
+                    video: req.body.slideVideo,
+                    image: req.body.slideImage,
+                    background: req.body.slideBackground,
+                    code: req.body.slideCode
+                }}
             },
             { upsert: true },
             function (err, slides) {

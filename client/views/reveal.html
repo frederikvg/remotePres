@@ -29,8 +29,8 @@
     <div class='slides'>
         <section data-background='{{ s.background }}' ng-repeat='s in data.slides'>
             <div class='titleText' ng-if='s.slidetitle'>{{ s.slidetitle }}</div>
-            <div class='contentText'>
-                {{ s.slidecontent }}
+            <div class='contentText' ng-if='s.slidecontent'><pre>{{ s.slidecontent }}</pre></div>
+            <div class='' ng-if='s.code'><pre><code>{{ s.code }}</code><pre></div>
                 <video data-autoplay ng-if='s.video'>
                     <source ng-src='{{ s.video }}' type='video/mp4' />
                 </video>

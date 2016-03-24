@@ -74,6 +74,7 @@ slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope
         routes.createSlide($scope.user._id, $scope.pres.presTitle, $scope.pres)
             .success(function () {
                 loadSlides($scope.pres.presTitle);
+                $scope.pres = {};
             });
     };
 
@@ -103,7 +104,6 @@ slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope
         } else {
             $scope.slide_index++;
         }
-        console.log(($scope.slide_index + 1) + '/' + ($scope.slides.slides.length ));
     };
 
     $scope.vorige = function () {
@@ -112,6 +112,5 @@ slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope
         } else {
             $scope.slide_index--;
         }
-        console.log(($scope.slide_index + 1) + '/' + $scope.slides.slides.length);
     };
 }]);

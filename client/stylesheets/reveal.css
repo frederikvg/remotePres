@@ -42,3 +42,15 @@ section div.titleText {
 section div.contentText {
     width: 100%;
 }
+
+section div.contentText pre {
+    box-shadow: none !important;
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Helvetica Neue';
+}
+
+section img {
+    max-height: 600px !important;
+    max-width: 600px !important;
+}

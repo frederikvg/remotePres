@@ -34,27 +34,51 @@
             <h1>{{ slides.presentatie }}<br />
             <span>{{ slides.created }}</span></h1>
             <div class='form-group'>
-                <span>Slide titel</span>
+                <span>Slide titel:</span>
                 <input type='text' class='form-control input-form' placeholder='slide titel...' ng-model='pres.slideTitle' />
             </div>
             <div class='form-group'>
-                <span>Slide content</span>
-                <input type='text' class='form-control input-form' placeholder='slide content' ng-model='pres.slideContent' />
+                <span>Content plain text:</span>
+                <textarea type='text' class='form-control input-form' placeholder='slide tekst...' ng-model='pres.slideContent' style='height:100px !important' />
+            </div>
+            <div class='form-group'>
+                <span>Content code text:</span>
+                <textarea type='text' class='form-control input-form' placeholder='slide code...' ng-model='pres.slideCode' style='height:100px !important' />
+            </div>
+            <div class='form-group'>
+                <span>Afbeelding:</span>
+                <input type='text' class='form-control input-form' placeholder='afbeelding url...' ng-model='pres.slideImage' />
+            </div>
+            <div class='form-group'>
+                <span>Video:</span>
+                <input type='text' class='form-control input-form' placeholder='video url...' ng-model='pres.slideVideo' />
+            </div>
+            <div class='form-group'>
+                <span>Achtergrond:</span>
+                <input type='text' class='form-control input-form' placeholder='achtergrond url...' ng-model='pres.slideBackground' />
             </div>
             <div class='center-text'>
-                <input type='submit' value='Save slide' ng-click='saveSlide()' class='btn btn-green btn-form' />
+                <input type='submit' value='Save slide' ng-click='saveSlide()' class='btn btn-green btn-form col-xs-3' />
             </div>
         </form>
-        <div class='' style='border: solid white 1px'>
+        <div class='slides'>
             <div ng-repeat='slide in slides.slides' class=''>
                 <div class='' ng-if="slide_index == $index">
                     <div class='slide-count'>{{ slideNumber }}<input type='button' ng-click='deleteSlide(slide.slidetitle)' class='btn-delete' value='x' /></div>
-                    <h2>{{ slide.slidetitle }}</h2>
-                    <h4>
-                        Maker: <span>{{ slide.slidecontent }}</span><br />
-                        Aangemaakt: <span>{{ presentatie.created }}u</span><br />
-                        <input type='button' class='btn btn-green btn-form' ng-click="vorige()" value='Vorige' /><input type='button' class='btn btn-green btn-form' ng-click="volgende()" value='Volgende' />
-                    </h4>
+                    <div class='slidecontent'>
+                        <h2>{{ slide.slidetitle }}</h2>
+                        <h4>
+                            Content: <span>{{ slide.slidecontent }}</span><br />
+                            Code: <span>{{ slide.code }}</span><br />
+                            Afbeelding: <span>{{ slide.image }}</span><br />
+                            Video: <span>{{ slide.video }}</span><br />
+                            Achtergrond: <span>{{ slide.background }}</span><br />
+                            <div class='center-text'>
+                                <input type='button' class='btn btn-default btn-slide col-xs-3' ng-click="vorige()" value='Vorige' />
+                                <input type='button' class='btn btn-default btn-slide col-xs-3' ng-click="volgende()" value='Volgende' />
+                            </div>
+                        </h4>
+                    </div>
                 </div>
             </div>
         </div>
