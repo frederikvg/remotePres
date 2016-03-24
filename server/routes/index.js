@@ -148,5 +148,39 @@ module.exports = function (passport) {
         });
     });
     
+    router.delete('/deletepres/:id/:name', function (req, res) {
+        User.update(
+            { _id: req.params.id },
+            { $pull:
+                { presentaties: { presentatie: req.params.name }}
+            },
+            { upsert: true },
+            function (err, pres) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.status(200).json(pres);
+                }
+            }
+        );
+    });
+    
+    router.delete('/deleteslide/:id/:name/:slide', function (req, res) {
+        User.update(
+            { _id: req.params.id, 'presentaties.presentatie': req.params.name },
+            { $pull:
+                { 'presentaties.$.slides': { slidetitle: req.params.slide }}
+            },
+            { upsert: true },
+            function (err, slides) {
+                if (err) {
+                    res.send(err);
+                } else {
+                    res.status(200).json(slides);
+                }
+            }
+        );
+    });
+    
 	return router;
 };

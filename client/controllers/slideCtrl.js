@@ -4,6 +4,7 @@ var slideCtrl = angular.module('slideCtrl', []);
 
 slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope, routes, $http) {
 
+    $scope.slide_index = 0;
     $scope.pres = {};
     var request = $http.get('/status'),
         user = $scope.user,
@@ -35,6 +36,7 @@ slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope
     var loadSlides = function (presTitle) {
         routes.getslides(presTitle).success(function (data) {
             $scope.slides = data;
+            $scope.slideNumber = ($scope.slide_index + 1) + '/' + $scope.slides.slides.length
             console.log(data);
             var time = new Date(data.created);
                 $scope.slides.created =
@@ -59,12 +61,26 @@ slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope
             });
     };
 
+    $scope.deletePres = function (presTitle) {
+        routes.deletepres($scope.user._id, presTitle)
+            .success(function (user) {
+                loadPres();
+            });
+    };
+
     $scope.saveSlide = function () {
         $scope.pres.presTitle = $scope.slides.presentatie;
         console.log($scope.pres);
         routes.createSlide($scope.user._id, $scope.pres.presTitle, $scope.pres)
             .success(function () {
                 loadSlides($scope.pres.presTitle);
+            });
+    };
+
+    $scope.deleteSlide = function (slideTitle) {
+        routes.deleteslide($scope.user._id, $scope.slides.presentatie, slideTitle)
+            .success(function (user) {
+                loadSlides($scope.slides.presentatie);
             });
     };
 
@@ -80,4 +96,22 @@ slideCtrl.controller('slideCtrl', ['$scope', 'routes', '$http', function ($scope
         $scope.addPres = true;
         loadSlides(presTitle);
     }
+
+    $scope.volgende = function () {
+        if ($scope.slide_index >= $scope.slides.slides.length - 1) {
+            $scope.slide_index = 0;
+        } else {
+            $scope.slide_index++;
+        }
+        console.log(($scope.slide_index + 1) + '/' + ($scope.slides.slides.length ));
+    };
+
+    $scope.vorige = function () {
+        if ($scope.slide_index < 1) {
+            $scope.slide_index = $scope.slides.slides.length - 1;
+        } else {
+            $scope.slide_index--;
+        }
+        console.log(($scope.slide_index + 1) + '/' + $scope.slides.slides.length);
+    };
 }]);

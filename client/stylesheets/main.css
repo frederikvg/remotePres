@@ -303,6 +303,20 @@ span {
     box-shadow: 0px 3px 0px rgba(193,82,78,.4) !important;
 }
 
+.btn-delete {
+    float: right;
+    color: rgba(242,105,100,1);
+    background-color: transparent;
+    border: none;
+    font-size: 34px !important;
+    margin: -8px 10px 0 10px;
+}
+
+.slide-count {
+    float: right;
+    font-size: 2em !important;  
+}
+
 .btn-form {
     margin: 10px 0 !important;
 }

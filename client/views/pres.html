@@ -14,8 +14,9 @@
             </div>
         </form>
         <div class='row'>
-            <div ng-repeat='presentatie in presentaties' class='col-xs-6'>
-                <div class='pres-group' ng-click='openPres(presentatie.presentatie)'>
+            <div ng-repeat='presentatie in presentaties' class='pres-group col-xs-6'>
+                    <input type='button' ng-click='deletePres(presentatie.presentatie)' class='btn-delete' value='x' />
+                <div class='' ng-click='openPres(presentatie.presentatie)'>
                     <h2>{{ presentatie.presentatie }}</h2>
                     <h4>
                         Maker: <span>{{ presentatie.maker }}</span><br />
@@ -44,13 +45,15 @@
                 <input type='submit' value='Save slide' ng-click='saveSlide()' class='btn btn-green btn-form' />
             </div>
         </form>
-        <div class='row'>
-            <div ng-repeat='slide in slides.slides' class='col-xs-6'>
-                <div class='pres-group' ng-click='openPres(presentatie.presentatie)'>
+        <div class='' style='border: solid white 1px'>
+            <div ng-repeat='slide in slides.slides' class=''>
+                <div class='' ng-if="slide_index == $index">
+                    <div class='slide-count'>{{ slideNumber }}<input type='button' ng-click='deleteSlide(slide.slidetitle)' class='btn-delete' value='x' /></div>
                     <h2>{{ slide.slidetitle }}</h2>
                     <h4>
                         Maker: <span>{{ slide.slidecontent }}</span><br />
-                        Aangemaakt: <span>{{ presentatie.created }}u</span>
+                        Aangemaakt: <span>{{ presentatie.created }}u</span><br />
+                        <input type='button' class='btn btn-green btn-form' ng-click="vorige()" value='Vorige' /><input type='button' class='btn btn-green btn-form' ng-click="volgende()" value='Volgende' />
                     </h4>
                 </div>
             </div>

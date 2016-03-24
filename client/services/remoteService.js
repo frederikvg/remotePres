@@ -46,8 +46,14 @@ remoteService.factory('routes', ['$http', function ($http) {
         createPres: function (userId, newPres) {
             return $http.post('/addpres/' + userId, newPres);
         },
+        deletepres: function (userId, presTitle) {
+            return $http.delete('/deletepres/' + userId + '/' + presTitle);
+        },
         createSlide: function (userId, presName, newSlide) {
             return $http.post('/addslide/' + userId + '/' + presName, newSlide);
+        },
+        deleteslide: function (userId, presTitle, slideTitle) {
+            return $http.delete('/deleteslide/' + userId + '/' + presTitle + '/' + slideTitle);
         },
         editprofile: function (userId, userEdit) {
             return $http.post('/editprofile/' + userId, userEdit);    
