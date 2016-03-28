@@ -30,11 +30,13 @@ remotePres.run(function ($rootScope, $location, $route, AuthService) {
     $rootScope.$on('$routeChangeStart',
         function (event, next, current) {
             AuthService.getUserStatus();
-            if (next.$$route.access.restricted && !AuthService.isLoggedIn()) {
-                $location.path('/login');
-                $route.reload();
+            if (next.$$route) {
+                if (next.$$route.access.restricted && !AuthService.isLoggedIn()) {
+                    $location.path('/login');
+                    $route.reload();
+                }
             }
-        });
+    });
 });
 
 remotePres.directive('fbTopnav', function () {
